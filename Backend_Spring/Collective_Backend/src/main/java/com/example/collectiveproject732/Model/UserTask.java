@@ -7,7 +7,6 @@ import net.bytebuddy.utility.nullability.MaybeNull;
 import javax.persistence.*;
 import java.time.LocalDate;
 
-@Data
 @Entity
 public class UserTask {
     @Id
@@ -18,12 +17,10 @@ public class UserTask {
     public LocalDate deadline;
 
     @ManyToOne
-    @MapsId("taskId")
     @JoinColumn(name = "task_id")
     public Task task;
 
     @ManyToOne
-    @MapsId("userId")
     @JoinColumn(name = "user_id")
     public User user;
 }
