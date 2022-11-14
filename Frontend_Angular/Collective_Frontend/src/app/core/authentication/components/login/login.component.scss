@@ -1,0 +1,45 @@
+mat-card {
+  text-align: center;
+  background-color: #e7e1eb;
+}
+
+mat-form-field {
+  width: 100%;
+  min-width: 300px;
+  display: block;
+}
+
+.mat-raised-button {
+  background-color: rebeccapurple;
+  color: white;
+}
+
+form {
+  background-color: #e7e1eb;
+  display: flex;
+  flex-direction: column;
+
+  & > * {
+    margin-bottom: 1rem;
+  }
+}
+
+:host {
+  display: flex;
+  justify-content: center;
+  margin: 100px 0;
+}
+
+mat-card-title,
+mat-card-content {
+  display: flex;
+  justify-content: center;
+}
+
+.error {
+  padding: 16px;
+  width: 300px;
+  color: white;
+  background-color: red;
+}
+
