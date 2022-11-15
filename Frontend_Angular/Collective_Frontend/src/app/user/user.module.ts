@@ -10,6 +10,7 @@ import { MatIconModule} from "@angular/material/icon";
 
 import { ReactiveFormsModule } from '@angular/forms';
 import {MatSelectModule} from "@angular/material/select";
+import {BackendRequestsModule} from "../backend-requests/backend-requests.module";
 
 
 @NgModule({
@@ -22,6 +23,7 @@ import {MatSelectModule} from "@angular/material/select";
   imports: [
     CommonModule,
     BrowserAnimationsModule,
+    BackendRequestsModule,
     MatCardModule,
     MatButtonModule,
     MatInputModule,
