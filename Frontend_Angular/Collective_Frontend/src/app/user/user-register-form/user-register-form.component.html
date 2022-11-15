@@ -5,7 +5,7 @@
       <p>Registration</p>
     </div>
 
-    <form (ngSubmit)="onSubmit()" name="loginForm" [formGroup]="registerForm">
+    <form (ngSubmit)="onSubmit()" name="registerForm" [formGroup]="registerForm">
 
       <div class="emailInput">
         <mat-form-field class="full-width" appearance="outline">
@@ -42,7 +42,7 @@
 
           <input formControlName="password" placeholder="Enter password" matInput [type]=" hide ? 'password' : 'text'" required />
 
-          <button  mat-icon-button matSuffix (click)="hide = !hide" [attr.aria-label]="'Hide Password'"
+          <button mat-icon-button matSuffix type="button" (click)="hide = !hide" [attr.aria-label]="'Hide Password'"
                    [attr.aria-pressed]="hide">
             <mat-icon>
               {{hide ? 'visibility_off' : 'visibility'}}
@@ -64,7 +64,7 @@
 
           <input formControlName="repeatPassword" placeholder="Re-enter password" matInput [type]=" repeatHide ? 'password' : 'text'" required />
 
-          <button  mat-icon-button matSuffix (click)="repeatHide = !repeatHide" [attr.aria-label]="'Hide Password'"
+          <button mat-icon-button matSuffix type="button" (click)="repeatHide = !repeatHide" [attr.aria-label]="'Hide Password'"
                    [attr.aria-pressed]="repeatHide">
             <mat-icon>
               {{repeatHide ? 'visibility_off' : 'visibility'}}
@@ -142,7 +142,7 @@
 
       </div>
 
-      <button mat-flat-button color="primary">Register</button>
+      <button mat-flat-button class="register-form-submit-button" color="primary">Register</button>
     </form>
 
   </mat-card-content>

@@ -3,6 +3,7 @@ mat-card {
   margin: 2em auto;
   text-align: center;
   max-height: 800px;
+  background-image: linear-gradient(to left, #624b9b, #864bc9);
 }
 
 .header {
@@ -10,20 +11,22 @@ mat-card {
   width: 50%;
   height: auto;
   text-align: center;
-  color: #8E24AA;
+  color: whitesmoke; /* #8E24AA; */
   font-size: 1.5rem;
   font-family: Arial, ui-monospace;
   background-color: #343434;
   border-style: groove;
   border-color: whitesmoke;
   border-width: 1px;
-
+  text-shadow: 0 5px 12px #8E24AA;
+  background-image: linear-gradient(to left, #553f93, #8E24AA);
 }
 
 .header p {
   margin: auto;
   padding-top: 10px;
   padding-bottom: 10px;
+  font-size: 2rem;
 }
 
 .full-width {
@@ -36,7 +39,15 @@ mat-card {
 
 .contentBody {
   padding: 60px 1rem;
-  background : #1383d7;
   display: block;
+}
+
+.register-form-submit-button{
+  width: 20%;
+  background-image: linear-gradient(to left, #553f93, #8E24AA);
+}
+
+.register-form-submit-button:hover{
+  background-image: linear-gradient(to right, #cea25a, #dc7900);
 }
 

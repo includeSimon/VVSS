@@ -1,5 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import {FormGroup, FormControl, Validators, AbstractControl, ValidationErrors, ValidatorFn} from "@angular/forms";
+import {Observable, subscribeOn} from "rxjs";
+import {BackendRequestsService} from "../../backend-requests/backend-requests.service";
 
 @Component({
   selector: 'user-register-form',
@@ -11,7 +13,7 @@ export class UserRegisterFormComponent implements OnInit {
   hide: boolean = false;
   repeatHide: boolean = false;
 
-  constructor() { }
+  constructor(private backendService : BackendRequestsService ) { }
 
   ngOnInit(): void {
   }
@@ -64,8 +66,18 @@ export class UserRegisterFormComponent implements OnInit {
 
   onSubmit() : void {
     if (this.registerForm.valid) {
-      alert("DATA SENT !")
+      this.register(this.registerForm.value)
     }
+  }
+
+  register(data: any) { //: Observable<any>{
+    let display : String = '';
+    for (let control in data) {
+      display += data[control.valueOf()] + '\n';
+    }
+    display += this.selectedRole;
+    alert(display);
+    //return this.backendService.post("", data,{responseType: 'text'} );
   }
 
 }
