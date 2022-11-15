@@ -10,8 +10,8 @@ import {BackendRequestsService} from "../../backend-requests/backend-requests.se
 })
 export class UserRegisterFormComponent implements OnInit {
 
-  hide: boolean = false;
-  repeatHide: boolean = false;
+  hide: boolean = true;
+  repeatHide: boolean = true;
 
   constructor(private backendService : BackendRequestsService ) { }
 
