@@ -1,8 +1,6 @@
 package com.example.collectiveproject732.Model;
 
 import com.sun.istack.NotNull;
-import lombok.Data;
-
 import javax.persistence.*;
 import java.util.List;
 
