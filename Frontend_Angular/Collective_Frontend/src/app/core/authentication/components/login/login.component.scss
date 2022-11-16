@@ -1,7 +1,6 @@
-body {
+:host {
   display: flex;
   justify-content: center;
-  margin: 100px 0;
 }
 
 .register {
@@ -9,6 +8,10 @@ body {
   .register-hyperlink {
     color: #dc7900;
   }
+}
+
+.mat-card {
+  margin-top: 10em;
 }
 
 form {
