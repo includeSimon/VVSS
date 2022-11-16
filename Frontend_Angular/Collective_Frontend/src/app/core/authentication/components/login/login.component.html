@@ -1,24 +1,37 @@
 <mat-card>
   <mat-card-content>
     <form [formGroup]="loginForm">
-      <h2>Log In</h2>
-      <mat-form-field>
-        <input matInput placeholder="Username" formControlName="username"
-               required>
-        <mat-error>
-          Vă rugăm introduceți un nume de utilizator valid
-        </mat-error>
-      </mat-form-field>
+      <div class="header">
+        <p>Log In</p>
+      </div>
+      <div>
+        <mat-form-field appearance="outline">
+          <mat-label>Username</mat-label>
 
-      <mat-form-field>
-        <input matInput type="password" placeholder="Password" formControlName="password" required>
-        <mat-error>
-          Vă rugăm introduceți o parolă validă
-        </mat-error>
-      </mat-form-field>
+          <input formControlName="username" matInput placeholder="Enter username" required/>
+          <mat-error>
+            Please enter a valid username
+          </mat-error>
+        </mat-form-field>
+      </div>
 
+      <div>
+        <mat-form-field appearance="outline">
+          <mat-label>Password</mat-label>
+          <input matInput type="password" placeholder="Enter password" formControlName="password" required>
+          <mat-error>
+            Please enter a valid password
+          </mat-error>
+        </mat-form-field>
+      </div>
 
+      <div>
       <button mat-raised-button color="primary" (click)="login()">Log in</button>
+      </div>
+      <div class="register">
+        No account?
+        <a routerLink="/register" routerLinkActive="active" class="register-hyperlink">Register now!</a>
+      </div>
     </form>
   </mat-card-content>
 </mat-card>

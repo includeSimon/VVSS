@@ -6,6 +6,7 @@ import {MatButtonModule} from "@angular/material/button";
 import {MatInputModule} from "@angular/material/input";
 import {AuthService} from "./authentication/services/auth.service";
 import {NgModule} from "@angular/core";
+import {AppRoutingModule} from "../app-routing.module";
 
 @NgModule({
   declarations: [LoginComponent],
@@ -16,6 +17,7 @@ import {NgModule} from "@angular/core";
     MatButtonModule,
     MatInputModule,
     ReactiveFormsModule,
+    AppRoutingModule
   ],
   providers: [
     AuthService
