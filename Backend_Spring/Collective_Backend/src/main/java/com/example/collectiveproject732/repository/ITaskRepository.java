@@ -1,6 +1,6 @@
-package com.example.collectiveproject732.Repository;
+package com.example.collectiveproject732.repository;
 
-import com.example.collectiveproject732.Model.Task;
+import com.example.collectiveproject732.model.Task;
 
 import java.util.Optional;
 

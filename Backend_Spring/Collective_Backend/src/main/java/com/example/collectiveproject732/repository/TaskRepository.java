@@ -1,9 +1,9 @@
-package com.example.collectiveproject732.Repository;
+package com.example.collectiveproject732.repository;
 
 import org.hibernate.Session;
 import org.hibernate.SessionFactory;
 import org.hibernate.Transaction;
-import com.example.collectiveproject732.Model.Task;
+import com.example.collectiveproject732.model.Task;
 import org.springframework.stereotype.Component;
 
 import java.util.Optional;

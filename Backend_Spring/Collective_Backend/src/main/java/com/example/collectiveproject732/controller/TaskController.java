@@ -1,8 +1,8 @@
-package com.example.collectiveproject732.Controller;
+package com.example.collectiveproject732.controller;
 
-import com.example.collectiveproject732.Model.Task;
-import com.example.collectiveproject732.Service.Exceptions.ServiceException;
-import com.example.collectiveproject732.Service.ITaskService;
+import com.example.collectiveproject732.model.Task;
+import com.example.collectiveproject732.service.exceptions.ServiceException;
+import com.example.collectiveproject732.service.ITaskService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;

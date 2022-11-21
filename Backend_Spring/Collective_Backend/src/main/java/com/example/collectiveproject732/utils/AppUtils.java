@@ -1,4 +1,4 @@
-package com.example.collectiveproject732.Repository.Utils;
+package com.example.collectiveproject732.utils;
 
 import java.io.InputStream;
 import java.util.Properties;

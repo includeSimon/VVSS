@@ -1,8 +1,8 @@
-package com.example.collectiveproject732.Service;
+package com.example.collectiveproject732.service;
 
-import com.example.collectiveproject732.Model.Task;
-import com.example.collectiveproject732.Model.viewmodel.TaskViewModel;
-import com.example.collectiveproject732.Service.Exceptions.ServiceException;
+import com.example.collectiveproject732.model.Task;
+import com.example.collectiveproject732.model.viewmodel.TaskViewModel;
+import com.example.collectiveproject732.service.exceptions.ServiceException;
 
 public interface ITaskService {
     /**

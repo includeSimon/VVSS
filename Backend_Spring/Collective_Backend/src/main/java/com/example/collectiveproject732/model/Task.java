@@ -1,7 +1,8 @@
-package com.example.collectiveproject732.Model;
+package com.example.collectiveproject732.model;
 
 import com.sun.istack.NotNull;
 import javax.persistence.*;
+import java.util.ArrayList;
 import java.util.List;
 
 @Entity
@@ -18,7 +19,10 @@ public class Task {
     @NotNull
     public String name;
 
-    @OneToMany(mappedBy = "task")
-    List<UserTask> usersTasks;
-
+    @OneToMany(
+            mappedBy = "task",
+            cascade = CascadeType.ALL,
+            orphanRemoval = true
+    )
+    private List<UserTask> usersTasks = new ArrayList<>();
 }

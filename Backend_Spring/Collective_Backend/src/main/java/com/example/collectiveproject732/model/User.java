@@ -1,4 +1,4 @@
-package com.example.collectiveproject732.Model;
+package com.example.collectiveproject732.model;
 
 import com.sun.istack.NotNull;
 
@@ -26,10 +26,11 @@ public class User {
     @NotNull
     public String lastName;
 
-    //todo make this stuff work idk
-    public String password;
     @NotNull
     public String email;
+
+    @NotNull
+    public String password;
 
     @NotNull
     public boolean isAdmin;

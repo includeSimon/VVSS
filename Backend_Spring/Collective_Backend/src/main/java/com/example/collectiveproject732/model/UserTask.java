@@ -1,8 +1,6 @@
-package com.example.collectiveproject732.Model;
+package com.example.collectiveproject732.model;
 
 import com.sun.istack.NotNull;
-import lombok.Data;
-import net.bytebuddy.utility.nullability.MaybeNull;
 
 import javax.persistence.*;
 import java.time.LocalDate;
@@ -16,11 +14,11 @@ public class UserTask {
     @NotNull
     public LocalDate deadline;
 
-    @ManyToOne
+    @ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "task_id")
     public Task task;
 
-    @ManyToOne
+    @ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "user_id")
     public User user;
 }

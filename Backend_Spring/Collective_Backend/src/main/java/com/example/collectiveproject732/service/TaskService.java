@@ -1,9 +1,9 @@
-package com.example.collectiveproject732.Service;
+package com.example.collectiveproject732.service;
 
-import com.example.collectiveproject732.Model.Task;
-import com.example.collectiveproject732.Model.viewmodel.TaskViewModel;
-import com.example.collectiveproject732.Repository.ITaskRepository;
-import com.example.collectiveproject732.Service.Exceptions.ServiceException;
+import com.example.collectiveproject732.model.Task;
+import com.example.collectiveproject732.model.viewmodel.TaskViewModel;
+import com.example.collectiveproject732.repository.ITaskRepository;
+import com.example.collectiveproject732.service.exceptions.ServiceException;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 

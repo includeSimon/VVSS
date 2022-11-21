@@ -1,6 +1,6 @@
-package com.example.collectiveproject732.Model.viewmodel;
+package com.example.collectiveproject732.model.viewmodel;
 
-import com.example.collectiveproject732.Model.*;
+import com.example.collectiveproject732.model.*;
 
 public class TaskViewModel {
     public Long id;

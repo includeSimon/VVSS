@@ -1,4 +1,4 @@
-package com.example.collectiveproject732.Service.Exceptions;
+package com.example.collectiveproject732.service.exceptions;
 
 public class ServiceException extends Exception {
 
