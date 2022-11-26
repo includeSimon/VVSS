@@ -1,7 +1,8 @@
-package com.example.collectiveproject732.Utility;
+package com.example.collectiveproject.Utility;
 
-import com.example.collectiveproject732.Model.Category;
-import com.example.collectiveproject732.Model.Status;
+import com.example.collectiveproject.Model.Category;
+import com.example.collectiveproject.Model.Status;
+
 
 import java.time.LocalDate;
 import java.time.YearMonth;
@@ -63,8 +64,7 @@ public class TaskValidator {
             date = LocalDate.parse(dateToVerify, dtfymd);
         }
         try {
-            if (date.isAfter(today)) return true;
-            else return false;
+            return date.isAfter(today);
         } catch (DateTimeParseException e) {
             e.printStackTrace();
         }

@@ -1,20 +1,28 @@
-package com.example.collectiveproject732.Service;
+package com.example.collectiveproject.Service;
 
-import com.example.collectiveproject732.DTO.TaskDTO;
-import com.example.collectiveproject732.Model.Task;
-import com.example.collectiveproject732.Repository.TaskRepository;
-import com.example.collectiveproject732.Utility.TaskValidator;
-import org.springframework.beans.factory.annotation.Autowired;
+import com.example.collectiveproject.Model.DTO.TaskDTO;
+import com.example.collectiveproject.Model.Task;
+import com.example.collectiveproject.Model.UserTask;
+import com.example.collectiveproject.Repository.TaskRepository;
+import com.example.collectiveproject.Utility.TaskValidator;
 import org.springframework.stereotype.Service;
+import org.springframework.web.servlet.tags.HtmlEscapingAwareTag;
 
+import java.util.ArrayList;
 import java.util.List;
 import java.util.stream.Collectors;
 
 @Service
 public class TaskService {
+    private final TaskRepository taskRepository;
 
-    @Autowired
-    private TaskRepository taskRepository;
+    public TaskService(TaskRepository taskRepository) {
+        this.taskRepository = taskRepository;
+    }
+
+    public List<Task> findAll(){
+        return this.taskRepository.findAll();
+    }
 
     public List<TaskDTO> getTasks(){
         return ((List<Task>) taskRepository.findAll())
@@ -54,25 +62,27 @@ public class TaskService {
     }
 
     public TaskDTO convertEntityToDto(Task task) {
-        return TaskDTO.builder()
-                .id(task.getId())
-                .name(task.getName())
-                .description(task.getDescription())
-                .targetDate(task.getTargetDate())
-                .status(task.getStatus())
-                .category(task.getCategory())
-                .build();
+        return new TaskDTO(
+                task.getId(),
+                task.getName(),
+                task.getDescription(),
+                task.getTargetDate(),
+                task.getStatus(),
+                task.getCategory(),
+                task.getReward()
+        );
     }
 
     public Task convertDtoToEntity(TaskDTO taskDTO) {
-        return Task.builder()
-                .id(taskDTO.getId())
-                .name(taskDTO.getName())
-                .description(taskDTO.getDescription())
-                .targetDate(taskDTO.getTargetDate())
-                .category(taskDTO.getCategory())
-                .status(taskDTO.getStatus())
-                .build();
+        return new Task(
+                taskDTO.getId(),
+                taskDTO.getCategory(),
+                taskDTO.getName(),
+                taskDTO.getStatus(),
+                taskDTO.getTargetDate(),
+                taskDTO.getReward(),
+                taskDTO.getDescription(),
+                new ArrayList<>()
+        );
     }
-
 }
