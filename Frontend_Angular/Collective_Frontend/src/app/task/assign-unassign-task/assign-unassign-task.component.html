@@ -1,0 +1,69 @@
+<mat-card>
+  <mat-card-content>
+    <div>
+      <form (ngSubmit)="onSubmit()">
+
+        <mat-form-field appearance="fill">
+          <mat-label>Users</mat-label>
+          <mat-select [(ngModel)]="selectedUser" name="user-select" (selectionChange)="getUserTasks(selectedUser)">
+            <mat-option *ngFor="let user of users" [value]="user.username">
+              {{user.username}} <!-- Display value -->
+            </mat-option>
+          </mat-select>
+
+          <mat-error *ngIf="!selectedUser">
+            Please select a user !
+          </mat-error>
+
+        </mat-form-field>
+
+        <p> Selected user: {{selectedUser}} </p>
+
+        <mat-form-field appearance="fill">
+          <mat-label>Available Tasks</mat-label>
+          <mat-select [(ngModel)]="selectedTask" name="task-select">
+            <mat-option *ngFor="let task of tasks" [value]="task.task_name">
+              {{task.task_name}} <!-- Display value -->
+            </mat-option>
+          </mat-select>
+
+          <mat-error *ngIf="!selectedTask">
+            Please select a task !
+          </mat-error>
+
+        </mat-form-field>
+
+        <p> Selected task: {{selectedTask}} </p>
+
+        <button mat-flat-button color="primary" (click)="this.action='assign'">Assign</button>
+        <button mat-flat-button color="primary" (click)="this.action='unassign'">Unassign</button>
+
+      </form>
+    </div>
+  </mat-card-content>
+</mat-card>
+
+<table mat-table [dataSource]="userTasks" (contentChanged)="refresh()" class="mat-elevation-z8"
+       *ngIf="userTasks !== undefined || userTasks === null">
+
+  <!-- Name Column -->
+  <ng-container matColumnDef="task_name">
+    <th mat-header-cell *matHeaderCellDef> Name </th>
+    <td mat-cell *matCellDef="let task"> {{task.task_name}} </td>
+  </ng-container>
+
+  <!-- Category Column -->
+  <ng-container matColumnDef="task_category">
+    <th class="view-header-cell" mat-header-cell *matHeaderCellDef> Category </th>
+    <td mat-cell *matCellDef="let task"> {{task.task_category}} </td>
+  </ng-container>
+
+  <!-- Deadline Column -->
+  <ng-container matColumnDef="task_deadline">
+    <th class="view-header-cell" mat-header-cell *matHeaderCellDef> Deadline </th>
+    <td mat-cell *matCellDef="let task"> {{task.task_deadline}} </td>
+  </ng-container>
+
+  <tr mat-header-row class="table-header" *matHeaderRowDef="displayedColumns"></tr>
+  <tr mat-row *matRowDef="let row; columns: displayedColumns;"></tr>
+</table>

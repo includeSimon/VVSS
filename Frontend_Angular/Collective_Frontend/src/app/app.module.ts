@@ -8,6 +8,8 @@ import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import {CoreModule} from "./core/core.module";
 import {HttpClientModule} from "@angular/common/http";
 import {FormsModule} from "@angular/forms";
+import {TaskModule} from "./task/task.module";
+import {CategoryModule} from "./category/category.module";
 
 @NgModule({
   declarations: [
@@ -21,7 +23,9 @@ import {FormsModule} from "@angular/forms";
     HttpClientModule,
     FormsModule,
     AppRoutingModule,
-    UserModule
+    UserModule,
+    TaskModule,
+    CategoryModule
   ],
   providers: [],
   bootstrap: [AppComponent]
