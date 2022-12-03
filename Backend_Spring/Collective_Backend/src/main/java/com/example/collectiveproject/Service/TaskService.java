@@ -61,6 +61,32 @@ public class TaskService {
 
     }
 
+    @Override
+    public Task deleteTask(Long taskId) {
+
+        Optional<Task> task = taskRepository.findAllById(Math.toIntExact(taskId));
+
+        if (task.isPresent()) {
+            taskRepository.deleteById(taskId);
+    }
+
+        @Override
+        public Task updateTask(Task task, Long taskId) throws Exception {
+            Optional<Task> oldTask = taskRepository.findAllById(Math.toIntExact(taskId));
+
+            if (oldTask.isEmpty()) {
+                throw new Exception("Invalid taskID");
+            }
+
+            if (!Objects.equals(task.getId(), oldTask.getId())) {
+                throw new Exception("The id does not correspond to old id");
+            }
+
+            taskRepository.save(task);
+
+            return task;
+        }
+
     public TaskDTO convertEntityToDto(Task task) {
         return new TaskDTO(
                 task.getId(),
