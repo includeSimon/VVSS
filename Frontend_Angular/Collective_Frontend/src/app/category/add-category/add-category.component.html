@@ -1,0 +1,35 @@
+<div class="form">
+  <form class="form-container" [formGroup]="categoryForm" (ngSubmit)="onSubmit()">
+    <mat-card>
+      <mat-card-header>
+        <mat-card-title>Category Information</mat-card-title>
+      </mat-card-header>
+      <mat-card-content>
+        <div class="row">
+          <div class="col-md-6">
+            <mat-form-field class="full-width">
+              <input matInput placeholder="Name" formControlName="nameCategory">
+              <mat-error *ngIf="categoryForm.controls['nameCategory'].hasError('required')">You need to enter a name</mat-error>
+              <mat-icon matSuffix>title</mat-icon>
+            </mat-form-field>
+          </div>
+          <div class="row">
+            <mat-form-field class="full-width">
+              <mat-label >Color</mat-label>
+              <mat-error *ngIf="categoryForm.controls['colorCategory'].hasError('required')">You need to select a color</mat-error>
+              <mat-icon matSuffix>color_lens</mat-icon>
+              <select matNativeControl required formControlName="colorCategory">
+                <option disabled>Select Color</option>
+                <option>Choose a Color</option>
+                <option *ngFor="let color of keys()">{{color}}</option>
+              </select>
+            </mat-form-field>
+          </div>
+        </div>
+        <div class="btnSubmit">
+          <button mat-raised-button color="primary">Submit</button>
+        </div>
+      </mat-card-content>
+    </mat-card>
+  </form>
+</div>
