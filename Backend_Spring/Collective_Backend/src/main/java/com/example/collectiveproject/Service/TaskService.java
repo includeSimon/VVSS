@@ -10,6 +10,7 @@ import org.springframework.web.servlet.tags.HtmlEscapingAwareTag;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Objects;
 import java.util.stream.Collectors;
 
 @Service
@@ -84,5 +85,13 @@ public class TaskService {
                 taskDTO.getDescription(),
                 new ArrayList<>()
         );
+    }
+
+    public List<Task> findAllByUsername(String username) {
+        return taskRepository.findAll().stream().filter(task ->
+                task.getUsersTasks().stream().filter(userTask ->
+                        Objects.equals(userTask.getUser().getUserName(), username)
+                ).toList().size() > 0
+        ).toList();
     }
 }
