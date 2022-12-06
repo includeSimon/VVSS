@@ -5,11 +5,7 @@ import com.example.collectiveproject.Service.UserService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Controller;
-import org.springframework.stereotype.Repository;
-import org.springframework.web.bind.annotation.CrossOrigin;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
 
@@ -24,5 +20,10 @@ public class UserController {
     @GetMapping("/find-all")
     public ResponseEntity<List<User>> findAll(){
         return ResponseEntity.ok(this.userService.findAll());
+    }
+
+    @GetMapping("/find-by-id/{id}")
+    public User findUserById(@PathVariable(value="id") long id) {
+        return userService.findById(id);
     }
 }
