@@ -1,7 +1,9 @@
 package com.example.collectiveproject732.Service;
 
 import com.example.collectiveproject732.DTO.TaskDTO;
+import com.example.collectiveproject732.Model.Category;
 import com.example.collectiveproject732.Model.Task;
+import com.example.collectiveproject732.Repository.CategoryRepository;
 import com.example.collectiveproject732.Repository.TaskRepository;
 import com.example.collectiveproject732.Utility.TaskValidator;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -15,6 +17,9 @@ public class TaskService {
 
     @Autowired
     private TaskRepository taskRepository;
+
+    @Autowired
+    private CategoryService categoryService;
 
     public List<TaskDTO> getTasks(){
         return ((List<Task>) taskRepository.findAll())
@@ -45,9 +50,16 @@ public class TaskService {
             throw new Exception("Status is not valid!");
         }
 
-        if(!TaskValidator.isValidCategory(task.getCategory().toString())){
-            throw new Exception("Category is not valid!");
+        if(!TaskValidator.isValidRewardPoints(task.getRewardPoints())){
+            throw new Exception("Reward points are a number between 0 and 10!");
         }
+
+        Category category = this.categoryService.findCategoryByCategoryName(task.category.getNameCategory());
+
+        if(category == null)
+            throw new Exception("Category was not found!");
+
+        task.setCategory(category);
 
         return this.taskRepository.save(task);
 
@@ -60,7 +72,8 @@ public class TaskService {
                 .description(task.getDescription())
                 .targetDate(task.getTargetDate())
                 .status(task.getStatus())
-                .category(task.getCategory())
+                .category(task.getCategory().getNameCategory())
+                .rewardPoints(task.getRewardPoints())
                 .build();
     }
 
@@ -70,8 +83,9 @@ public class TaskService {
                 .name(taskDTO.getName())
                 .description(taskDTO.getDescription())
                 .targetDate(taskDTO.getTargetDate())
-                .category(taskDTO.getCategory())
+                .category(this.categoryService.findCategoryByCategoryName(taskDTO.getCategory()))
                 .status(taskDTO.getStatus())
+                .rewardPoints(taskDTO.getRewardPoints())
                 .build();
     }
 

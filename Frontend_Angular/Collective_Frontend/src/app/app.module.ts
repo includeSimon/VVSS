@@ -5,10 +5,11 @@ import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
 import {UserModule} from "./user/user.module";
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
-import {BrowserAnimationsModule} from '@angular/platform-browser/animations';
 import {CoreModule} from "./core/core.module";
 import {HttpClientModule} from "@angular/common/http";
 import {FormsModule} from "@angular/forms";
+import {CategoryComponent} from "./category/category/category.component";
+import {CategoryModule} from "./category/category.module";
 
 @NgModule({
   declarations: [
@@ -22,7 +23,8 @@ import {FormsModule} from "@angular/forms";
     HttpClientModule,
     FormsModule,
     AppRoutingModule,
-    UserModule
+    UserModule,
+    CategoryModule
   ],
   providers: [],
   bootstrap: [AppComponent]

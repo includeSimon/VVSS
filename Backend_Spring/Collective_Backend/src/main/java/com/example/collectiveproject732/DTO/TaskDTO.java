@@ -2,12 +2,11 @@ package com.example.collectiveproject732.DTO;
 
 import com.example.collectiveproject732.Model.Category;
 import com.example.collectiveproject732.Model.Status;
-import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Data;
-import lombok.NoArgsConstructor;
 
 import java.time.LocalDate;
+import java.util.List;
 
 @Data
 @Builder
@@ -18,5 +17,6 @@ public class TaskDTO {
     private String description;
     private LocalDate targetDate;
     private Status status;
-    private Category category;
+    private String category;
+    private Integer rewardPoints;
 }
