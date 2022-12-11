@@ -19,9 +19,8 @@
               <mat-error *ngIf="categoryForm.controls['colorCategory'].hasError('required')">You need to select a color</mat-error>
               <mat-icon matSuffix>color_lens</mat-icon>
               <select matNativeControl required formControlName="colorCategory">
-                <option disabled>Select Color</option>
                 <option>Choose a Color</option>
-                <option *ngFor="let color of keys()">{{color}}</option>
+                <option class = "ng-star-inserted-text" *ngFor="let color of keys()">{{color}}</option>
               </select>
             </mat-form-field>
           </div>
