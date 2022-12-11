@@ -66,4 +66,10 @@ public class TaskValidator {
         return false;
     }
 
+    public static boolean isValidDaysToCompleteTask(Integer daysToCompleteTask){
+        if(daysToCompleteTask == 0)
+            return false;
+        return true;
+    }
+
 }

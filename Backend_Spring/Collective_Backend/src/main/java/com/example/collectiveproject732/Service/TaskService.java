@@ -42,8 +42,8 @@ public class TaskService {
             throw new Exception("Description is not valid!");
         }
 
-        if(TaskValidator.isValidDate(task.getTargetDate().toString())){
-            throw new Exception("Date is not valid!");
+        if(!TaskValidator.isValidDaysToCompleteTask(task.getDaysToCompleteTask())){
+            throw new Exception("Days to complete task should be higher than 0!");
         }
 
         if(!TaskValidator.isValidStatus(task.getStatus().toString())){
@@ -70,7 +70,7 @@ public class TaskService {
                 .id(task.getId())
                 .name(task.getName())
                 .description(task.getDescription())
-                .targetDate(task.getTargetDate())
+                .daysToCompleteTask(task.getDaysToCompleteTask())
                 .status(task.getStatus())
                 .category(task.getCategory().getNameCategory())
                 .rewardPoints(task.getRewardPoints())
@@ -82,7 +82,7 @@ public class TaskService {
                 .id(taskDTO.getId())
                 .name(taskDTO.getName())
                 .description(taskDTO.getDescription())
-                .targetDate(taskDTO.getTargetDate())
+                .daysToCompleteTask(taskDTO.getDaysToCompleteTask())
                 .category(this.categoryService.findCategoryByCategoryName(taskDTO.getCategory()))
                 .status(taskDTO.getStatus())
                 .rewardPoints(taskDTO.getRewardPoints())

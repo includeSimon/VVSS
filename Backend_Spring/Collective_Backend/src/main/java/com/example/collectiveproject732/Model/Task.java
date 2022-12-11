@@ -11,7 +11,6 @@ import lombok.NoArgsConstructor;
 import javax.persistence.*;
 import java.io.Serializable;
 import java.time.LocalDate;
-import java.util.ArrayList;
 import java.util.List;
 import java.util.Objects;
 
@@ -38,7 +37,7 @@ public class Task implements Serializable {
     public Status status;
 
     @NotNull
-    public LocalDate targetDate;
+    public Integer daysToCompleteTask;
 
     @NotNull
     public Integer rewardPoints;
@@ -58,7 +57,6 @@ public class Task implements Serializable {
     public void setId(Long id) {
         this.id = id;
     }
-
 
 
     public String getName() {
@@ -85,15 +83,6 @@ public class Task implements Serializable {
         this.status = status;
     }
 
-    public LocalDate getTargetDate() {
-        return targetDate;
-    }
-
-    public void setTargetDate(LocalDate targetDate) {
-        this.targetDate = targetDate;
-    }
-
-
     public Category getCategory() {
         return category;
     }
@@ -101,7 +90,6 @@ public class Task implements Serializable {
     public void setCategory(Category category) {
         this.category = category;
     }
-
 
     public int getRewardPoints() {
         return rewardPoints;
@@ -111,17 +99,13 @@ public class Task implements Serializable {
         this.rewardPoints = rewardPoints;
     }
 
-    @Override
-    public String toString() {
-        return "Task{" +
-                "id=" + id +
-                ", name='" + name + '\'' +
-                ", description='" + description + '\'' +
-                ", status=" + status +
-                ", targetDate=" + targetDate +
-                ", rewardPoints=" + rewardPoints +
-                ", category=" + category +
-                '}';
+
+    public Integer getDaysToCompleteTask() {
+        return daysToCompleteTask;
+    }
+
+    public void setDaysToCompleteTask(Integer daysToCompleteTask) {
+        this.daysToCompleteTask = daysToCompleteTask;
     }
 
     @Override
@@ -129,11 +113,25 @@ public class Task implements Serializable {
         if (this == o) return true;
         if (o == null || getClass() != o.getClass()) return false;
         Task task = (Task) o;
-        return rewardPoints == task.rewardPoints && id.equals(task.id) && name.equals(task.name) && Objects.equals(description, task.description) && status == task.status && targetDate.equals(task.targetDate) && Objects.equals(usersTasks, task.usersTasks) && category.equals(task.category);
+        return id.equals(task.id) && name.equals(task.name) && description.equals(task.description) && status == task.status && daysToCompleteTask.equals(task.daysToCompleteTask) && rewardPoints.equals(task.rewardPoints) && Objects.equals(usersTasks, task.usersTasks) && category.equals(task.category);
     }
 
     @Override
     public int hashCode() {
-        return Objects.hash(id, name, description, status, targetDate, rewardPoints, usersTasks, category);
+        return Objects.hash(id, name, description, status, daysToCompleteTask, rewardPoints, usersTasks, category);
+    }
+
+    @Override
+    public String toString() {
+        return "Task{" +
+                "id=" + id +
+                ", name='" + name + '\'' +
+                ", description='" + description + '\'' +
+                ", status=" + status +
+                ", daysToCompleteTask=" + daysToCompleteTask +
+                ", rewardPoints=" + rewardPoints +
+                ", usersTasks=" + usersTasks +
+                ", category=" + category +
+                '}';
     }
 }
