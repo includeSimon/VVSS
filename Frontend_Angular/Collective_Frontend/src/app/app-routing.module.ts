@@ -3,6 +3,8 @@ import { RouterModule, Routes } from '@angular/router';
 import {LoginComponent} from "./core/authentication/components/login/login.component";
 import {UserRegisterFormComponent} from "./user/user-register-form/user-register-form.component";
 import {AppComponent} from "./app.component";
+import {AssignUnassignTaskComponent} from "./task/assign-unassign-task/assign-unassign-task.component";
+import {AddCategoryComponent} from "./category/add-category/add-category.component";
 
 const routes: Routes = [
   {
@@ -15,6 +17,16 @@ const routes: Routes = [
   {
     path: 'register',
     component: UserRegisterFormComponent,
+    pathMatch: 'full'
+  },
+  {
+    path: 'task-assignation',
+    component: AssignUnassignTaskComponent,
+    pathMatch: 'full'
+  },
+  {
+    path: 'add-category',
+    component: AddCategoryComponent,
     pathMatch: 'full'
   }
 ];

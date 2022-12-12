@@ -1,13 +1,18 @@
-package com.example.collectiveproject732.Model;
+package com.example.collectiveproject.Model;
 
 import com.sun.istack.NotNull;
-import lombok.Data;
-import net.bytebuddy.utility.nullability.MaybeNull;
+import lombok.Getter;
+import lombok.Setter;
 
-import javax.persistence.*;
+import javax.persistence.Entity;
+import javax.persistence.Id;
+import javax.persistence.JoinColumn;
+import javax.persistence.ManyToOne;
 import java.time.LocalDate;
 
 @Entity
+@Getter
+@Setter
 public class UserTask {
     @Id
     @NotNull

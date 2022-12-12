@@ -3,7 +3,7 @@
   <component name="ProjectModuleManager">
     <modules>
       <module fileurl="file://$PROJECT_DIR$/.idea/732_Collective_Project.iml" filepath="$PROJECT_DIR$/.idea/732_Collective_Project.iml" />
-      <module fileurl="file://$PROJECT_DIR$/Backend_Spring/Collective_Backend/Collective-project-732.iml" filepath="$PROJECT_DIR$/Backend_Spring/Collective_Backend/Collective-project-732.iml" />
+      <module fileurl="file://$PROJECT_DIR$/Backend_Spring/Collective_Backend/collective-project.iml" filepath="$PROJECT_DIR$/Backend_Spring/Collective_Backend/collective-project.iml" />
     </modules>
   </component>
 </project>
