@@ -25,16 +25,11 @@ public class TaskValidator {
         return true;
     }
 
-    public static boolean isValidCategory(String category){
-        if(category == null || category.isEmpty())
+    public static boolean isValidRewardPoints(int rewardPoints){
+        if(rewardPoints > 10)
             return false;
 
-        for(Category categoryValue: Category.values()){
-            if(categoryValue.toString().equals(category))
-                return true;
-        }
-
-        return false;
+        return true;
     }
 
     public static boolean isValidStatus(String status){
