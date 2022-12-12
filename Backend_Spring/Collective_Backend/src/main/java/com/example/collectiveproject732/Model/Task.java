@@ -11,6 +11,7 @@ import lombok.NoArgsConstructor;
 import javax.persistence.*;
 import java.io.Serializable;
 import java.time.LocalDate;
+import java.util.ArrayList;
 import java.util.List;
 import java.util.Objects;
 
@@ -83,6 +84,8 @@ public class Task implements Serializable {
         this.status = status;
     }
 
+
+
     public Category getCategory() {
         return category;
     }
@@ -91,12 +94,7 @@ public class Task implements Serializable {
         this.category = category;
     }
 
-    public int getRewardPoints() {
-        return rewardPoints;
-    }
 
-    public void setRewardPoints(int rewardPoints) {
-        this.rewardPoints = rewardPoints;
     }
 
 
@@ -104,9 +102,19 @@ public class Task implements Serializable {
         return daysToCompleteTask;
     }
 
+    }
+
     public void setDaysToCompleteTask(Integer daysToCompleteTask) {
         this.daysToCompleteTask = daysToCompleteTask;
+
+  	public Integer getRewardPoints() {
+        return rewardPoints;
     }
+
+    public void setRewardPoints(Integer rewardPoints) {
+        this.rewardPoints = rewardPoints;
+    }
+
 
     @Override
     public boolean equals(Object o) {
