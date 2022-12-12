@@ -1,7 +1,7 @@
-package com.example.collectiveproject732.Model;
+package com.example.collectiveproject.Model;
 
 import com.sun.istack.NotNull;
-
+import lombok.Data;
 import lombok.Getter;
 import lombok.Setter;
 

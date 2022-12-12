@@ -9,6 +9,7 @@ import {CoreModule} from "./core/core.module";
 import {HttpClientModule} from "@angular/common/http";
 import {FormsModule} from "@angular/forms";
 import {CategoryComponent} from "./category/category/category.component";
+import {TaskModule} from "./task/task.module";
 import {CategoryModule} from "./category/category.module";
 
 @NgModule({
@@ -24,6 +25,7 @@ import {CategoryModule} from "./category/category.module";
     FormsModule,
     AppRoutingModule,
     UserModule,
+    TaskModule,
     CategoryModule
   ],
   providers: [],
