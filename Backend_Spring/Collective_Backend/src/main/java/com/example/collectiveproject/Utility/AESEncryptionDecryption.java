@@ -47,18 +47,4 @@ public class AESEncryptionDecryption {
         }
         return null;
     }
-
-    public static void main(String[] args) {
-        final String secretKey = "secretKey";
-
-        String originalString = "parola_mea_regina_pe_sosea";
-
-        AESEncryptionDecryption aesEncryptionDecryption = new AESEncryptionDecryption();
-        String encryptedString = aesEncryptionDecryption.encrypt(originalString, secretKey);
-        String decryptedString = aesEncryptionDecryption.decrypt(encryptedString, secretKey);
-
-        System.out.println(originalString);
-        System.out.println(encryptedString);
-        System.out.println(decryptedString);
-    }
 }
