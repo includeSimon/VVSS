@@ -15,7 +15,7 @@ public class TaskDTO {
     private Long id;
     private String name;
     private String description;
-    private LocalDate targetDate;
+    private Integer daysToCompleteTask;
     private Status status;
     private String category;
     private Integer rewardPoints;

@@ -38,7 +38,7 @@ public class Task implements Serializable {
     public Status status;
 
     @NotNull
-    public LocalDate targetDate;
+    public Integer daysToCompleteTask;
 
     @NotNull
     public Integer rewardPoints;
@@ -58,7 +58,6 @@ public class Task implements Serializable {
     public void setId(Long id) {
         this.id = id;
     }
-
 
 
     public String getName() {
@@ -85,13 +84,6 @@ public class Task implements Serializable {
         this.status = status;
     }
 
-    public LocalDate getTargetDate() {
-        return targetDate;
-    }
-
-    public void setTargetDate(LocalDate targetDate) {
-        this.targetDate = targetDate;
-    }
 
 
     public Category getCategory() {
@@ -103,12 +95,38 @@ public class Task implements Serializable {
     }
 
 
-    public int getRewardPoints() {
+    }
+
+
+    public Integer getDaysToCompleteTask() {
+        return daysToCompleteTask;
+    }
+
+    }
+
+    public void setDaysToCompleteTask(Integer daysToCompleteTask) {
+        this.daysToCompleteTask = daysToCompleteTask;
+
+  	public Integer getRewardPoints() {
         return rewardPoints;
     }
 
-    public void setRewardPoints(int rewardPoints) {
+    public void setRewardPoints(Integer rewardPoints) {
         this.rewardPoints = rewardPoints;
+    }
+
+
+    @Override
+    public boolean equals(Object o) {
+        if (this == o) return true;
+        if (o == null || getClass() != o.getClass()) return false;
+        Task task = (Task) o;
+        return id.equals(task.id) && name.equals(task.name) && description.equals(task.description) && status == task.status && daysToCompleteTask.equals(task.daysToCompleteTask) && rewardPoints.equals(task.rewardPoints) && Objects.equals(usersTasks, task.usersTasks) && category.equals(task.category);
+    }
+
+    @Override
+    public int hashCode() {
+        return Objects.hash(id, name, description, status, daysToCompleteTask, rewardPoints, usersTasks, category);
     }
 
     @Override
@@ -118,22 +136,10 @@ public class Task implements Serializable {
                 ", name='" + name + '\'' +
                 ", description='" + description + '\'' +
                 ", status=" + status +
-                ", targetDate=" + targetDate +
+                ", daysToCompleteTask=" + daysToCompleteTask +
                 ", rewardPoints=" + rewardPoints +
+                ", usersTasks=" + usersTasks +
                 ", category=" + category +
                 '}';
-    }
-
-    @Override
-    public boolean equals(Object o) {
-        if (this == o) return true;
-        if (o == null || getClass() != o.getClass()) return false;
-        Task task = (Task) o;
-        return rewardPoints == task.rewardPoints && id.equals(task.id) && name.equals(task.name) && Objects.equals(description, task.description) && status == task.status && targetDate.equals(task.targetDate) && Objects.equals(usersTasks, task.usersTasks) && category.equals(task.category);
-    }
-
-    @Override
-    public int hashCode() {
-        return Objects.hash(id, name, description, status, targetDate, rewardPoints, usersTasks, category);
     }
 }
