@@ -1,4 +1,4 @@
-package com.example.collectiveproject732.Model;
+package com.example.collectiveproject.Model;
 
 public enum Color {
     RED,
