@@ -12,12 +12,12 @@ import javax.persistence.*;
 import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Objects;
 
 @Entity
 @Builder
 @NoArgsConstructor
 @AllArgsConstructor
-@Data
 @JsonIdentityInfo(generator = ObjectIdGenerators.PropertyGenerator.class,
         property = "id")
 public class Category implements Serializable {
@@ -39,6 +39,52 @@ public class Category implements Serializable {
             mappedBy = "category"
     )
     public List<Task> tasks = new ArrayList<>();
+
+
+    public Long getId() {
+        return id;
+    }
+
+    public void setId(Long id) {
+        this.id = id;
+    }
+
+    public String getNameCategory() {
+        return nameCategory;
+    }
+
+    public void setNameCategory(String nameCategory) {
+        this.nameCategory = nameCategory;
+    }
+
+    public Color getColor() {
+        return color;
+    }
+
+    public void setColor(Color color) {
+        this.color = color;
+    }
+
+    public List<Task> getTasks() {
+        return tasks;
+    }
+
+    public void setTasks(List<Task> tasks) {
+        this.tasks = tasks;
+    }
+
+    @Override
+    public boolean equals(Object o) {
+        if (this == o) return true;
+        if (o == null || getClass() != o.getClass()) return false;
+        Category category = (Category) o;
+        return id.equals(category.id) && nameCategory.equals(category.nameCategory) && color == category.color && tasks.equals(category.tasks);
+    }
+
+    @Override
+    public int hashCode() {
+        return Objects.hash(id, nameCategory, color, tasks);
+    }
 
     @Override
     public String toString() {

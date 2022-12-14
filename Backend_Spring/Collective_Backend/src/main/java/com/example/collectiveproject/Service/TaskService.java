@@ -9,7 +9,6 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
-import java.util.Objects;
 import java.util.stream.Collectors;
 
 @Service
@@ -25,13 +24,6 @@ public class TaskService {
         return this.taskRepository.findAll();
     }
 
-    public List<Task> findAllByUsername(String username) {
-        return taskRepository.findAll().stream().filter(task ->
-                task.getUsersTasks().stream().filter(userTask ->
-                        Objects.equals(userTask.getUser().getUserName(), username)
-                ).toList().size() > 0
-        ).toList();
-    }
 
     public List<TaskDTO> getTasks(){
         return (taskRepository.findAll())
@@ -84,7 +76,7 @@ public class TaskService {
                 .description(task.getDescription())
                 .daysToCompleteTask(task.getDaysToCompleteTask())
                 .status(task.getStatus())
-                .category(task.getCategory())
+                .category(task.getCategory().getNameCategory())
                 .rewardPoints(task.getRewardPoints())
                 .build();
     }
@@ -95,7 +87,7 @@ public class TaskService {
                 .name(taskDTO.getName())
                 .description(taskDTO.getDescription())
                 .daysToCompleteTask(taskDTO.getDaysToCompleteTask())
-                .category(this.categoryService.findCategoryByCategoryName(taskDTO.getCategory().getNameCategory()))
+                .category(this.categoryService.findCategoryByCategoryName(taskDTO.getCategory()))
                 .status(taskDTO.getStatus())
                 .rewardPoints(taskDTO.getRewardPoints())
                 .build();

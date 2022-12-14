@@ -1,5 +1,6 @@
 package com.example.collectiveproject.Controller;
 
+import com.example.collectiveproject.Model.DTO.TaskDTO;
 import com.example.collectiveproject.Model.Task;
 import com.example.collectiveproject.Service.TaskService;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -11,30 +12,20 @@ import java.util.List;
 
 @RestController
 @Controller
-@CrossOrigin("localhost:4200")
-@RequestMapping("api/tasks")
+@CrossOrigin(origins = "*")
+@RequestMapping("/task")
 public class TaskController {
     @Autowired
     private TaskService taskService;
 
-    @GetMapping("/find-all")
-    public ResponseEntity<List<Task>> findAllTasks(){
-        return ResponseEntity.ok(this.taskService.findAll());
+    @GetMapping("/allTasks")
+    public List<TaskDTO> getAllTasks(){return taskService.getTasks(); }
+
+    @RequestMapping(value="/addTask", method = RequestMethod.POST)
+    public TaskDTO addTask(@RequestBody TaskDTO taskDTO) throws Exception {
+        Task task = this.taskService.convertDtoToEntity(taskDTO);
+        Task taskCreated = this.taskService.addTask(task);
+        return taskService.convertEntityToDto(taskCreated);
     }
 
-    @GetMapping("/find-by-username/{username}")
-    public List<Task> findAllTasksByUsername(@PathVariable(value="username") String username){
-        return this.taskService.findAllByUsername(username);
-    }
-
-    @PostMapping("/add")
-    public boolean addTask(@RequestBody Task task){
-        try {
-            taskService.addTask(task);
-            return true;
-        } catch (Exception e) {
-            e.printStackTrace();
-            return false;
-        }
-    }
 }
