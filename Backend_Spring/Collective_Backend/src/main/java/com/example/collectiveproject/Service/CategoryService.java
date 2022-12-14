@@ -1,7 +1,7 @@
-package com.example.collectiveproject732.Service;
+package com.example.collectiveproject.Service;
 
-import com.example.collectiveproject732.Model.Category;
-import com.example.collectiveproject732.Repository.CategoryRepository;
+import com.example.collectiveproject.Model.Category;
+import com.example.collectiveproject.Repository.CategoryRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 

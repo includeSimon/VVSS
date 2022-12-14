@@ -1,32 +1,40 @@
 package com.example.collectiveproject.Service;
 
+import com.example.collectiveproject.Model.Category;
 import com.example.collectiveproject.Model.DTO.TaskDTO;
 import com.example.collectiveproject.Model.Task;
-import com.example.collectiveproject.Model.UserTask;
 import com.example.collectiveproject.Repository.TaskRepository;
 import com.example.collectiveproject.Utility.TaskValidator;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
-import org.springframework.web.servlet.tags.HtmlEscapingAwareTag;
 
-import java.util.ArrayList;
 import java.util.List;
 import java.util.Objects;
 import java.util.stream.Collectors;
 
 @Service
 public class TaskService {
-    private final TaskRepository taskRepository;
 
-    public TaskService(TaskRepository taskRepository) {
-        this.taskRepository = taskRepository;
-    }
+    @Autowired
+    private TaskRepository taskRepository;
+
+    @Autowired
+    private CategoryService categoryService;
 
     public List<Task> findAll(){
         return this.taskRepository.findAll();
     }
 
+    public List<Task> findAllByUsername(String username) {
+        return taskRepository.findAll().stream().filter(task ->
+                task.getUsersTasks().stream().filter(userTask ->
+                        Objects.equals(userTask.getUser().getUserName(), username)
+                ).toList().size() > 0
+        ).toList();
+    }
+
     public List<TaskDTO> getTasks(){
-        return ((List<Task>) taskRepository.findAll())
+        return (taskRepository.findAll())
                 .stream()
                 .map(this::convertEntityToDto)
                 .collect(Collectors.toList());
@@ -46,52 +54,51 @@ public class TaskService {
             throw new Exception("Description is not valid!");
         }
 
-        if(TaskValidator.isValidDate(task.getTargetDate().toString())){
-            throw new Exception("Date is not valid!");
+        if(!TaskValidator.isValidDaysToCompleteTask(task.getDaysToCompleteTask())){
+            throw new Exception("Days to complete task should be higher than 0!");
         }
 
         if(!TaskValidator.isValidStatus(task.getStatus().toString())){
             throw new Exception("Status is not valid!");
         }
 
-        if(!TaskValidator.isValidCategory(task.getCategory().toString())){
-            throw new Exception("Category is not valid!");
+        if(!TaskValidator.isValidRewardPoints(task.getRewardPoints())){
+            throw new Exception("Reward points are a number between 0 and 10!");
         }
+
+        Category category = this.categoryService.findCategoryByCategoryName(task.category.getNameCategory());
+
+        if(category == null)
+            throw new Exception("Category was not found!");
+
+        task.setCategory(category);
 
         return this.taskRepository.save(task);
 
     }
 
     public TaskDTO convertEntityToDto(Task task) {
-        return new TaskDTO(
-                task.getId(),
-                task.getName(),
-                task.getDescription(),
-                task.getTargetDate(),
-                task.getStatus(),
-                task.getCategory(),
-                task.getReward()
-        );
+        return TaskDTO.builder()
+                .id(task.getId())
+                .name(task.getName())
+                .description(task.getDescription())
+                .daysToCompleteTask(task.getDaysToCompleteTask())
+                .status(task.getStatus())
+                .category(task.getCategory())
+                .rewardPoints(task.getRewardPoints())
+                .build();
     }
 
     public Task convertDtoToEntity(TaskDTO taskDTO) {
-        return new Task(
-                taskDTO.getId(),
-                taskDTO.getCategory(),
-                taskDTO.getName(),
-                taskDTO.getStatus(),
-                taskDTO.getTargetDate(),
-                taskDTO.getReward(),
-                taskDTO.getDescription(),
-                new ArrayList<>()
-        );
+        return Task.builder()
+                .id(taskDTO.getId())
+                .name(taskDTO.getName())
+                .description(taskDTO.getDescription())
+                .daysToCompleteTask(taskDTO.getDaysToCompleteTask())
+                .category(this.categoryService.findCategoryByCategoryName(taskDTO.getCategory().getNameCategory()))
+                .status(taskDTO.getStatus())
+                .rewardPoints(taskDTO.getRewardPoints())
+                .build();
     }
 
-    public List<Task> findAllByUsername(String username) {
-        return taskRepository.findAll().stream().filter(task ->
-                task.getUsersTasks().stream().filter(userTask ->
-                        Objects.equals(userTask.getUser().getUserName(), username)
-                ).toList().size() > 0
-        ).toList();
-    }
 }

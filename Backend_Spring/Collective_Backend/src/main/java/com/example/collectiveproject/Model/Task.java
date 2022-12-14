@@ -1,20 +1,26 @@
 package com.example.collectiveproject.Model;
 
+import com.fasterxml.jackson.annotation.JsonIdentityInfo;
+import com.fasterxml.jackson.annotation.ObjectIdGenerators;
 import com.sun.istack.NotNull;
+import lombok.AllArgsConstructor;
 import lombok.Builder;
-import lombok.Getter;
-import lombok.Setter;
+import lombok.Data;
+import lombok.NoArgsConstructor;
 
-import javax.persistence.*;;
-import java.time.LocalDate;
-import java.util.ArrayList;
+import javax.persistence.*;
+import java.io.Serializable;
 import java.util.List;
+import java.util.Objects;
 
 @Entity
-@Getter
-@Setter
 @Builder
-public class Task {
+@Data
+@NoArgsConstructor
+@AllArgsConstructor
+@JsonIdentityInfo(generator = ObjectIdGenerators.PropertyGenerator.class,
+        property = "id")
+public class Task implements Serializable {
 
     @Id
     @NotNull
@@ -22,40 +28,50 @@ public class Task {
     public Long id;
 
     @NotNull
-    public Category category;
+    public String name;
 
     @NotNull
-    public String name;
+    public String description;
 
     @NotNull
     public Status status;
 
     @NotNull
-    public LocalDate targetDate;
-
+    public Integer daysToCompleteTask;
 
     @NotNull
-    public int reward;
-
-    public String description;
-
+    public Integer rewardPoints;
+    @ManyToOne(fetch = FetchType.LAZY)
+    @JoinColumn(name = "tasks")
+    public Category category;
     @OneToMany(mappedBy = "task")
     List<UserTask> usersTasks;
 
-    public Task(Long id, Category category, String name, Status status, LocalDate targetDate, int reward, String description, List<UserTask> usersTasks) {
-        this.id = id;
-        this.category = category;
-        this.name = name;
-        this.status = status;
-        this.targetDate = targetDate;
-        this.reward = reward;
-        this.description = description;
-        this.usersTasks = usersTasks;
+
+    @Override
+    public boolean equals(Object o) {
+        if (this == o) return true;
+        if (o == null || getClass() != o.getClass()) return false;
+        Task task = (Task) o;
+        return id.equals(task.id) && name.equals(task.name) && description.equals(task.description) && status == task.status && daysToCompleteTask.equals(task.daysToCompleteTask) && rewardPoints.equals(task.rewardPoints) && Objects.equals(usersTasks, task.usersTasks) && category.equals(task.category);
     }
 
-    public Task() {}
+    @Override
+    public int hashCode() {
+        return Objects.hash(id, name, description, status, daysToCompleteTask, rewardPoints, usersTasks, category);
+    }
 
-
-    public Task(Long id, Category category, String name, Status status, LocalDate targetDate, int reward, ArrayList<UserTask> userTasks) {
+    @Override
+    public String toString() {
+        return "Task{" +
+                "id=" + id +
+                ", name='" + name + '\'' +
+                ", description='" + description + '\'' +
+                ", status=" + status +
+                ", daysToCompleteTask=" + daysToCompleteTask +
+                ", rewardPoints=" + rewardPoints +
+                ", usersTasks=" + usersTasks +
+                ", category=" + category +
+                '}';
     }
 }
