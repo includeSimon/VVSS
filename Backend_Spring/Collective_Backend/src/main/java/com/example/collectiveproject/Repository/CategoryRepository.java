@@ -1,6 +1,7 @@
-package com.example.collectiveproject732.Repository;
+package com.example.collectiveproject.Repository;
 
-import com.example.collectiveproject732.Model.Category;
+import com.example.collectiveproject.Model.Category;
+import com.example.collectiveproject.Model.Category;
 import org.springframework.data.jpa.repository.Query;
 import org.springframework.data.repository.CrudRepository;
 import org.springframework.data.repository.query.Param;
