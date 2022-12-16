@@ -27,5 +27,10 @@ public class TaskController {
         Task taskCreated = this.taskService.addTask(task);
         return taskService.convertEntityToDto(taskCreated);
     }
+    
+    @GetMapping("/find-by-username/{username}")
+    public List<Task> findAllTasksByUsername(@PathVariable(value="username") String username){
+        return this.taskService.findAllByUsername(username);
+    }
 
 }
