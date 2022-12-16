@@ -9,6 +9,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
+import java.util.Objects;
 import java.util.stream.Collectors;
 
 @Service
@@ -30,6 +31,15 @@ public class TaskService {
                 .stream()
                 .map(this::convertEntityToDto)
                 .collect(Collectors.toList());
+    }
+
+
+    public List<Task> findAllByUsername(String username) {
+        return taskRepository.findAll().stream().filter(task ->
+                task.getUsersTasks().stream().filter(userTask ->
+                        Objects.equals(userTask.getUser().getUserName(), username)
+                ).toList().size() > 0
+        ).toList();
     }
 
     public Task addTask(Task task) throws Exception {
