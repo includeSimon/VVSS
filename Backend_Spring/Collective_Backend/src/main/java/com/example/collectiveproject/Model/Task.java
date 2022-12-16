@@ -43,9 +43,9 @@ public class Task implements Serializable {
     @JoinColumn(name = "tasks")
     public Category category;
 
-//    @OneToMany(mappedBy = "task")
-//    @ToString.Exclude
-//    List<UserTask> usersTasks;
+    @OneToMany(mappedBy = "task")
+    @ToString.Exclude
+    List<UserTask> usersTasks;
 
 
     @Override
@@ -57,6 +57,7 @@ public class Task implements Serializable {
                 ", status=" + status +
                 ", daysToCompleteTask=" + daysToCompleteTask +
                 ", rewardPoints=" + rewardPoints +
+                ", usersTasks=" + usersTasks +
                 ", category=" + category +
                 '}';
     }
@@ -129,5 +130,13 @@ public class Task implements Serializable {
     @Override
     public int hashCode() {
         return Objects.hash(id, name, description, status, daysToCompleteTask, rewardPoints, category);
+    }
+
+    public List<UserTask> getUsersTasks() {
+        return usersTasks;
+    }
+
+    public void setUsersTasks(List<UserTask> usersTasks) {
+        this.usersTasks = usersTasks;
     }
 }
