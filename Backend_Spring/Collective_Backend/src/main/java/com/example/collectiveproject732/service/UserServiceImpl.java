@@ -2,21 +2,27 @@ package com.example.collectiveproject732.service;
 
 import com.example.collectiveproject732.model.User;
 import com.example.collectiveproject732.repository.UserRepository;
-import org.springframework.beans.factory.annotation.Autowired;
+import lombok.RequiredArgsConstructor;
+import lombok.extern.slf4j.Slf4j;
+import org.apache.tomcat.util.http.parser.Authorization;
+import org.springframework.security.core.GrantedAuthority;
+import org.springframework.security.core.authority.SimpleGrantedAuthority;
+import org.springframework.security.core.userdetails.UserDetails;
+import org.springframework.security.core.userdetails.UserDetailsService;
+import org.springframework.security.core.userdetails.UsernameNotFoundException;
+import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.stereotype.Service;
 
-import java.util.List;
-import java.util.Optional;
+import java.util.*;
 
+@Slf4j
 @Service
-public class UserServiceImpl implements UserService {
+@RequiredArgsConstructor
+public class UserServiceImpl implements UserService, UserDetailsService {
 
+    private final static String USER_NOT_FOUND_MESSAGE = "Unable to find username %s";
     private final UserRepository userRepository;
-
-    @Autowired
-    public UserServiceImpl(UserRepository userRepository) {
-        this.userRepository = userRepository;
-    }
+    private final BCryptPasswordEncoder bCryptPasswordEncoder;
 
     @Override
     public List<User> getAll() {
@@ -25,12 +31,18 @@ public class UserServiceImpl implements UserService {
 
     @Override
     public User getByUsername(String username) {
-        return userRepository.findByUserName(username).orElse(null);
+        return userRepository.findByUserName(username)
+                .orElseThrow(() ->
+                new UsernameNotFoundException(
+                     String.format(USER_NOT_FOUND_MESSAGE, username)
+                )
+        );
     }
 
-    // todo: check for violations of user fields
     @Override
     public boolean addUser(User user) {
+        log.info("Saving new User {} with password {} to the database", user.getUserName(), user.getPassword());
+        user.setPassword(bCryptPasswordEncoder.encode(user.getPassword()));
         this.userRepository.save(user);
         return true;
     }
@@ -40,5 +52,13 @@ public class UserServiceImpl implements UserService {
         Optional<User> userOptional = userRepository.findByUserName(username);
         userOptional.ifPresent(user -> userRepository.deleteById(user.getId()));
         return userOptional.orElse(null);
+    }
+
+    @Override
+    public UserDetails loadUserByUsername(String username) throws UsernameNotFoundException {
+        User user = getByUsername(username);
+        GrantedAuthority authorization = new SimpleGrantedAuthority(user.getUserRole().toString());
+
+        return new org.springframework.security.core.userdetails.User(user.getUserName(), user.getPassword(), Collections.singletonList(authorization));
     }
 }
