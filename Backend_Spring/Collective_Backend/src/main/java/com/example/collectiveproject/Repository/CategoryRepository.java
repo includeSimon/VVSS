@@ -1,6 +1,7 @@
 package com.example.collectiveproject.Repository;
 
 import com.example.collectiveproject.Model.Category;
+import com.example.collectiveproject.Model.Task;
 import org.springframework.data.jpa.repository.Query;
 import org.springframework.data.repository.CrudRepository;
 import org.springframework.data.repository.query.Param;
@@ -14,5 +15,8 @@ public interface CategoryRepository extends CrudRepository<Category, Long> {
 
     @Query(value = "select * from Category c where c.name_category=?", nativeQuery = true)
     Category findByNameCategory(@Param("nameCategory") String nameCategory);
+
+    @Query(value = "select * from Task t where t.id=?", nativeQuery = true)
+    Task findByID(@Param("id") Long id);
 
 }
