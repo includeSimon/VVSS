@@ -72,16 +72,14 @@ export class UserRegisterFormComponent implements OnInit {
   }
 
   register(data: any): void {
-    let display: String = '';
-    for (let control in data) {
-      display += data[control.valueOf()] + '\n';
-    }
-    display += this.selectedRole;
-    alert(display);
+    // let display: String = '';
+    // for (let control in data) {
+    //   display += data[control.valueOf()] + '\n';
+    // }
+    // display += this.selectedRole;
+    // alert(display);
     data.isAdmin = this.selectedRole === 'admin';
     delete data['repeatPassword'];
-    console.log(this.selectedRole);
-    console.log(data);
     this.userService.registerUser(data).subscribe(() => {
       this.router.navigate(['/login']).then()
     });
