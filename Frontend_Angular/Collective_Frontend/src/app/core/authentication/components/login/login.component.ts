@@ -9,7 +9,6 @@ import {AuthService} from "../../services/auth.service";
 })
 export class LoginComponent implements OnInit {
   loginForm: FormGroup;
-  loginValid: boolean;
 
   constructor(private formBuilder: FormBuilder, private authService: AuthService) { }
 
@@ -35,9 +34,8 @@ export class LoginComponent implements OnInit {
 
   private setUpForm(): void {
     this.loginForm = this.formBuilder.group({
-      username: new FormControl('', Validators.required),
-      password: new FormControl('', Validators.required),
-      captcha: new FormControl('', Validators.required)
+      userName: new FormControl('', Validators.required),
+      password: new FormControl('', Validators.required)
     })
   }
 }
