@@ -1,7 +1,7 @@
-import { Component, OnInit } from '@angular/core';
-import {FormGroup, FormControl, Validators, AbstractControl, ValidationErrors, ValidatorFn} from "@angular/forms";
-import {Observable, subscribeOn} from "rxjs";
-import {BackendRequestsService} from "../../backend-requests/backend-requests.service";
+import {Component, OnInit} from '@angular/core';
+import {AbstractControl, FormControl, FormGroup, ValidationErrors, ValidatorFn, Validators} from "@angular/forms";
+import {UserService} from "../service/user.service";
+import {Router} from "@angular/router";
 
 @Component({
   selector: 'user-register-form',
@@ -13,12 +13,13 @@ export class UserRegisterFormComponent implements OnInit {
   hide: boolean = true;
   repeatHide: boolean = true;
 
-  constructor(private backendService : BackendRequestsService ) { }
+  constructor(private userService: UserService, private router: Router) {
+  }
 
   ngOnInit(): void {
   }
 
-  registerForm : FormGroup = new FormGroup(
+  registerForm: FormGroup = new FormGroup(
     {
       email: new FormControl('',
         [
@@ -26,7 +27,7 @@ export class UserRegisterFormComponent implements OnInit {
           Validators.email
         ]
       ),
-      username: new FormControl('',
+      userName: new FormControl('',
         [
           Validators.required,
         ]
@@ -43,41 +44,47 @@ export class UserRegisterFormComponent implements OnInit {
           matchValidator('password')
         ]
       ),
-      firstname: new FormControl('',
+      firstName: new FormControl('',
         [
           Validators.required,
         ]
       ),
-      lastname: new FormControl('',
+      lastName: new FormControl('',
         [
           Validators.required,
-        ]
-      ),
-      tel: new FormControl('',
-        [
-          Validators.required,
-          Validators.pattern('[0-9]+')
         ]
       )
+      // tel: new FormControl('',
+      //   [
+      //     Validators.required,
+      //     Validators.pattern('[0-9]+')
+      //   ]
+      // )
     }
   )
 
   selectedRole: any = '';
 
-  onSubmit() : void {
+  onSubmit(): void {
     if (this.registerForm.valid) {
-      this.register(this.registerForm.value)
+      this.register(this.registerForm.getRawValue())
     }
   }
 
-  register(data: any) { //: Observable<any>{
-    let display : String = '';
+  register(data: any): void {
+    let display: String = '';
     for (let control in data) {
       display += data[control.valueOf()] + '\n';
     }
     display += this.selectedRole;
     alert(display);
-    //return this.backendService.post("", data,{responseType: 'text'} );
+    data.isAdmin = this.selectedRole === 'admin';
+    delete data['repeatPassword'];
+    console.log(this.selectedRole);
+    console.log(data);
+    this.userService.registerUser(data).subscribe(() => {
+      this.router.navigate(['/login']).then()
+    });
   }
 
 }
@@ -96,7 +103,7 @@ export function matchValidator(
       }
       return null;
     }
-    return !!control.parent && !!control.parent.value && control.value === (control.parent?.controls as any)[matchTo].value ? null : { matching: true };
+    return !!control.parent && !!control.parent.value && control.value === (control.parent?.controls as any)[matchTo].value ? null : {matching: true};
   };
 }
 

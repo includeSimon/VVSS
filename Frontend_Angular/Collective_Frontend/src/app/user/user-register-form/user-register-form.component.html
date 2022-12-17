@@ -26,9 +26,9 @@
 
           <mat-label>Username</mat-label>
 
-          <input formControlName="username" matInput placeholder="Enter username" required/>
+          <input formControlName="userName" matInput placeholder="Enter username" required/>
 
-          <mat-error *ngIf="!registerForm.controls['username'].valid">
+          <mat-error *ngIf="!registerForm.controls['userName'].valid">
             Invalid username!
           </mat-error>
 
@@ -91,28 +91,28 @@
         </mat-form-field>
       </div>
 
-      <div>
-        <mat-form-field class="full-width" appearance="outline">
+<!--      <div>-->
+<!--        <mat-form-field class="full-width" appearance="outline">-->
 
-          <mat-label>Phone number</mat-label>
+<!--          <mat-label>Phone number</mat-label>-->
 
-          <input formControlName="tel" matInput placeholder="Enter phone number" required/>
+<!--          <input formControlName="tel" matInput placeholder="Enter phone number" required/>-->
 
-          <mat-error *ngIf="!registerForm.controls['tel'].valid">
-            Invalid phone number!
-          </mat-error>
+<!--          <mat-error *ngIf="!registerForm.controls['tel'].valid">-->
+<!--            Invalid phone number!-->
+<!--          </mat-error>-->
 
-        </mat-form-field>
-      </div>
+<!--        </mat-form-field>-->
+<!--      </div>-->
 
       <div>
         <mat-form-field class="full-width" appearance="outline">
 
           <mat-label>First name</mat-label>
 
-          <input formControlName="firstname" matInput placeholder="Enter first name" required/>
+          <input formControlName="firstName" matInput placeholder="Enter first name" required/>
 
-          <mat-error *ngIf="!registerForm.controls['firstname'].valid">
+          <mat-error *ngIf="!registerForm.controls['firstName'].valid">
             Invalid first name!
           </mat-error>
 
@@ -125,9 +125,9 @@
 
           <mat-label>Last name</mat-label>
 
-          <input formControlName="lastname" matInput placeholder="Enter last name" required/>
+          <input formControlName="lastName" matInput placeholder="Enter last name" required/>
 
-          <mat-error *ngIf="!registerForm.controls['lastname'].valid">
+          <mat-error *ngIf="!registerForm.controls['lastName'].valid">
             Invalid last name!
           </mat-error>
 
