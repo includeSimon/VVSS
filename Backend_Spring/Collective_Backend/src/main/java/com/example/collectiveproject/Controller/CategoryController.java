@@ -1,5 +1,6 @@
 package com.example.collectiveproject.Controller;
 
+import com.example.collectiveproject.Model.Category;
 import com.example.collectiveproject.Model.DTO.CategoryDTO;
 import com.example.collectiveproject.Model.DTO.CategoryDTO;
 import com.example.collectiveproject.Model.DTO.TaskDTO;
@@ -21,6 +22,6 @@ public class CategoryController {
     private CategoryService categoryService;
 
     @GetMapping("/allCategory")
-    public List<CategoryDTO> getAllTasks(){return categoryService.getCategory(); }
+    public Iterable<Category> getAllTasks(){return categoryService.getCategory(); }
 
 }
