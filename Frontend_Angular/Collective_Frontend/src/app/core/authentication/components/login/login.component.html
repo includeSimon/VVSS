@@ -8,7 +8,7 @@
         <mat-form-field appearance="outline">
           <mat-label>Username</mat-label>
 
-          <input formControlName="username" matInput placeholder="Enter username" required/>
+          <input formControlName="userName" matInput placeholder="Enter username" required/>
           <mat-error>
             Please enter a valid username
           </mat-error>
@@ -26,7 +26,7 @@
       </div>
 
       <div>
-      <button mat-raised-button color="primary" (click)="login()">Log in</button>
+      <button mat-raised-button color="primary" [disabled]="!formValid" (click)="login()">Log in</button>
       </div>
       <div class="register">
         No account?

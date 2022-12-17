@@ -10,6 +10,8 @@ export interface User {
   username: string;
   firstName: string;
   lastName: string;
+  isAdmin?: boolean;
+  email?: string;
 }
 
 const TASK_DATA: Task[] = [

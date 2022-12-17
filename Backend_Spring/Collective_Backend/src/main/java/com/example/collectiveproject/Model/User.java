@@ -20,19 +20,23 @@ public class User {
     @NotNull
     public String firstName;
 
+    @Column(name = "user_name", unique = true)
     @NotNull
     public String userName;
 
     @NotNull
     public String lastName;
 
-    //todo make this stuff work idk
+    @NotNull
     public String password;
+
     @NotNull
     public String email;
 
     @NotNull
     public boolean isAdmin;
+
+    public String token;
 
     @OneToMany(mappedBy = "user")
     public List<UserTask> userTasks;
