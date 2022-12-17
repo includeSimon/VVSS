@@ -80,14 +80,15 @@ public class TaskService {
 
     }
 
-    public Optional<Task> deleteTask(Long taskId) {
+    public void deleteTask(Long taskId) {
 
-        Optional<Task> task = Optional.ofNullable(taskRepository.findAllById(Long.valueOf(Math.toIntExact(taskId))));
-
-        if (task.isPresent()) {
-            taskRepository.deleteById(taskId);
-        }
-        return task;
+//        Optional<Task> task = Optional.ofNullable(taskRepository.findAllById(Long.valueOf(Math.toIntExact(taskId))));
+//
+//
+//        if (task.isPresent()) {
+//            taskRepository.deleteById(taskId);
+//        }
+        taskRepository.deleteById(taskId);
     }
 
 
@@ -101,6 +102,7 @@ public class TaskService {
             if (!Objects.equals(task.getId(), oldTask.get().id)) {
                 throw new Exception("The id does not correspond to old id");
             }
+
 
             taskRepository.save(task);
 

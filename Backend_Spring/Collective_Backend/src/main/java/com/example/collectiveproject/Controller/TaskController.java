@@ -44,13 +44,10 @@ public class TaskController {
      *         or with an error message if the task could not be added
      */
     @DeleteMapping("/delete/{taskId}")
-    public ResponseEntity<?> delete(@PathVariable Long taskId) {
-        try {
-            return new ResponseEntity<>(taskService.deleteTask(taskId), HttpStatus.OK);
-        }
-        catch (Exception e ){
-            return new ResponseEntity<>(e.getMessage(), HttpStatus.NOT_FOUND);
-        }
+    public void delete(@PathVariable() Long taskId) {
+      taskService.deleteTask(taskId);
+
+
     }
 
     /**
@@ -61,14 +58,14 @@ public class TaskController {
      * @param taskId the id of the task to be updated
      * @return the viewModel of the updated expense
      */
-//    @PostMapping("/update/{taskId}")
-//    public ResponseEntity<?> update(@RequestBody Task task, @PathVariable Long taskId) {
-//        try {
-//            task.setId(taskId);
-//            return new ResponseEntity<>(taskService.updateTask(task, taskId), HttpStatus.OK);
-//        } catch (ServiceException e) {
-//            return new ResponseEntity<>(e.getMessage(), HttpStatus.BAD_REQUEST);
-//        }
-//    }
+    @PostMapping("/update/{taskId}")
+    public ResponseEntity<?> update(@RequestBody Task task, @PathVariable Long taskId) {
+        try {
+            task.setId(taskId);
+            return new ResponseEntity<>(taskService.updateTask(task, taskId), HttpStatus.OK);
+        } catch (ServiceException e) {
+            return new ResponseEntity<>(e.getMessage(), HttpStatus.BAD_REQUEST);
+        }
+    }
 
 }
