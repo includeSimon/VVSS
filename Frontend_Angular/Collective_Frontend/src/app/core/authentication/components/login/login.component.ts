@@ -24,7 +24,6 @@ export class LoginComponent implements OnInit {
     if (this.loginForm.invalid) {
       return;
     }
-    console.log(this.loginForm.getRawValue());
     this.authService.login(this.loginForm.getRawValue())
 
   }

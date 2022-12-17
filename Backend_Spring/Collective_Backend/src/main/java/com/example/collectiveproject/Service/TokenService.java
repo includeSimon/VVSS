@@ -25,11 +25,11 @@ public class TokenService {
     private static final String AUTHORIZATION = "authorization";
     private static final String ROLE_USER = "ROLE_USER";
     private static final String AUTHORITIES = "authorities";
-    private static final String ID = "jbuggerJWT";
+    private static final String ID = "JWT";
     private static final Key secret = MacProvider.generateKey(SignatureAlgorithm.HS512);
     static final byte[] secretBytes = secret.getEncoded();
     private static final String base64SecretBytes = Base64.getEncoder().encodeToString(secretBytes);
-    private static final Long tokenDurationMillis = 60000000L;
+    private static final Long tokenDurationMillis = 10800000L;
 
     public String getJWTToken(String userName) {
         List<GrantedAuthority> grantedAuthorities = AuthorityUtils
@@ -60,12 +60,9 @@ public class TokenService {
 
 
     public Claims decodeJWT(String jwt) {
-
-        //This line will throw an exception if it is not a signed JWS (as expected)
-        Claims claims = Jwts.parser()
+        return Jwts.parser()
                 .setSigningKey(base64SecretBytes)
                 .parseClaimsJws(jwt).getBody();
-        return claims;
 
     }
 
