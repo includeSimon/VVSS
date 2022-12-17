@@ -4,6 +4,9 @@ import com.example.collectiveproject.Model.Category;
 import com.example.collectiveproject.Model.Status;
 import lombok.Builder;
 import lombok.Data;
+
+import java.time.LocalDate;
+
 @Data
 @Builder
 public class TaskDTO {
@@ -15,6 +18,6 @@ public class TaskDTO {
     private Status status;
     private String category;
     private Integer rewardPoints;
-
+    private LocalDate done;
 
 }

@@ -22,31 +22,33 @@ class WebSecurityConfig extends WebSecurityConfigurerAdapter {
 
     @Override
     protected void configure(HttpSecurity http) throws Exception {
-        http.csrf().disable()
-                .addFilterAfter(new JWTAuthorizationFilter(userRepository), UsernamePasswordAuthenticationFilter.class)
-                .authorizeRequests()
-                .antMatchers(HttpMethod.POST, "/auth/login").permitAll()
-                .antMatchers(HttpMethod.POST, "/register").permitAll()
-                .antMatchers(HttpMethod.GET).permitAll()
-                .anyRequest().authenticated();
-        http.cors().configurationSource(request -> {
-            CorsConfiguration corsConfiguration = new CorsConfiguration();
-
-            corsConfiguration.setAllowedMethods(List.of(HttpMethod.GET.name(),
-                    HttpMethod.POST.name(),
-                    HttpMethod.PUT.name(),
-                    HttpMethod.PATCH.name(),
-                    HttpMethod.DELETE.name())
-            );
-
-            corsConfiguration.setAllowedOriginPatterns(List.of(ORIGIN));
-
-            corsConfiguration.setAllowedOrigins(List.of(ORIGIN));
-
-            corsConfiguration.setAllowedHeaders(List.of(ANY_HEADER));
-
-
-            return corsConfiguration;
-        });
+//        http.csrf().disable()
+//                .addFilterAfter(new JWTAuthorizationFilter(userRepository), UsernamePasswordAuthenticationFilter.class)
+//                .authorizeRequests()
+//                .antMatchers(HttpMethod.POST, "/auth/login").permitAll()
+//                .antMatchers(HttpMethod.POST, "/register").permitAll()
+//                .antMatchers(HttpMethod.GET).permitAll()
+//                .anyRequest().authenticated();
+//        http.cors().configurationSource(request -> {
+//            CorsConfiguration corsConfiguration = new CorsConfiguration();
+//
+//            corsConfiguration.setAllowedMethods(List.of(HttpMethod.GET.name(),
+//                    HttpMethod.POST.name(),
+//                    HttpMethod.PUT.name(),
+//                    HttpMethod.PATCH.name(),
+//                    HttpMethod.DELETE.name())
+//            );
+//
+//            corsConfiguration.setAllowedOriginPatterns(List.of(ORIGIN));
+//
+//            corsConfiguration.setAllowedOrigins(List.of(ORIGIN));
+//
+//            corsConfiguration.setAllowedHeaders(List.of(ANY_HEADER));
+//
+//
+//            return corsConfiguration;
+//        });
+        http.csrf().disable();
+        http.authorizeRequests().antMatchers("/").permitAll();
     }
 }
