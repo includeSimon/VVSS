@@ -1,8 +1,6 @@
 package com.example.collectiveproject.Utility;
 
-import com.example.collectiveproject.Model.Category;
 import com.example.collectiveproject.Model.Status;
-
 
 import java.time.LocalDate;
 import java.time.YearMonth;
@@ -25,16 +23,11 @@ public class TaskValidator {
         return true;
     }
 
-    public static boolean isValidCategory(String category){
-        if(category == null || category.isEmpty())
+    public static boolean isValidRewardPoints(int rewardPoints){
+        if(rewardPoints > 10)
             return false;
 
-        for(Category categoryValue: Category.values()){
-            if(categoryValue.toString().equals(category))
-                return true;
-        }
-
-        return false;
+        return true;
     }
 
     public static boolean isValidStatus(String status){
@@ -69,6 +62,12 @@ public class TaskValidator {
             e.printStackTrace();
         }
         return false;
+    }
+
+    public static boolean isValidDaysToCompleteTask(Integer daysToCompleteTask){
+        if(daysToCompleteTask == 0)
+            return false;
+        return true;
     }
 
 }
