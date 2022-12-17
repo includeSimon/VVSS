@@ -8,6 +8,7 @@ import com.example.collectiveproject.Utility.TaskValidator;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import java.time.LocalDate;
 import java.util.List;
 import java.util.Objects;
 import java.util.stream.Collectors;
@@ -88,6 +89,7 @@ public class TaskService {
                 .status(task.getStatus())
                 .category(task.getCategory().getNameCategory())
                 .rewardPoints(task.getRewardPoints())
+                .done(task.getDone())
                 .build();
     }
 
@@ -103,4 +105,33 @@ public class TaskService {
                 .build();
     }
 
+    public boolean markDone(String taskName) {
+        List<Task> tasks = findAll().stream()
+                .filter(task1 -> task1.getName().equals(taskName)).toList();
+        Task task;
+        try {
+            task = tasks.get(0);
+        } catch (Exception e){
+            return false;
+        }
+
+        task.setDone(LocalDate.now());
+        taskRepository.save(task);
+        return true;
+    }
+
+    public boolean markUnDone(String taskName) {
+        List<Task> tasks = findAll().stream()
+                .filter(task1 -> task1.getName().equals(taskName)).toList();
+        Task task;
+        try {
+            task = tasks.get(0);
+        } catch (Exception e){
+            return false;
+        }
+
+        task.setDone(null);
+        taskRepository.save(task);
+        return true;
+    }
 }

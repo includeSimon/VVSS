@@ -1,5 +1,6 @@
 package com.example.collectiveproject.Controller;
 
+import com.example.collectiveproject.Model.DTO.UserDTO;
 import com.example.collectiveproject.Model.User;
 import com.example.collectiveproject.Service.UserService;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -10,6 +11,7 @@ import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
+import java.util.stream.Collectors;
 
 @RestController
 @Controller
@@ -20,8 +22,8 @@ public class UserController {
     private UserService userService;
 
     @GetMapping("/find-all")
-    public ResponseEntity<List<User>> findAll(){
-        return ResponseEntity.ok(this.userService.findAll());
+    public List<UserDTO> findAll(){
+        return userService.findAll().stream().map(User::convertToDTO).collect(Collectors.toList());
     }
 
     @GetMapping("/find-by-id/{id}")
