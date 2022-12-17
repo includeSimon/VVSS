@@ -5,6 +5,7 @@ import {UserRegisterFormComponent} from "./user/user-register-form/user-register
 import {AppComponent} from "./app.component";
 import {AssignUnassignTaskComponent} from "./task/assign-unassign-task/assign-unassign-task.component";
 import {AddCategoryComponent} from "./category/add-category/add-category.component";
+import {UnmarkedTaskListComponent} from "./task/unmarked-task-list/unmarked-task-list.component";
 
 const routes: Routes = [
   {
@@ -27,6 +28,11 @@ const routes: Routes = [
   {
     path: 'add-category',
     component: AddCategoryComponent,
+    pathMatch: 'full'
+  },
+  {
+    path: 'task-list',
+    component: UnmarkedTaskListComponent,
     pathMatch: 'full'
   }
 ];

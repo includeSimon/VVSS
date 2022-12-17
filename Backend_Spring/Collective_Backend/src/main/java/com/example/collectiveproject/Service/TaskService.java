@@ -10,6 +10,7 @@ import org.springframework.stereotype.Service;
 
 import java.util.List;
 import java.util.Objects;
+import java.util.Optional;
 import java.util.stream.Collectors;
 
 @Service
@@ -79,24 +80,25 @@ public class TaskService {
 
     }
 
-    @Override
-    public Task deleteTask(Long taskId) {
+    public Optional<Task> deleteTask(Long taskId) {
 
-        Optional<Task> task = taskRepository.findAllById(Math.toIntExact(taskId));
+        Optional<Task> task = Optional.ofNullable(taskRepository.findAllById(Long.valueOf(Math.toIntExact(taskId))));
 
         if (task.isPresent()) {
             taskRepository.deleteById(taskId);
+        }
+        return task;
     }
 
-        @Override
+
         public Task updateTask(Task task, Long taskId) throws Exception {
-            Optional<Task> oldTask = taskRepository.findAllById(Math.toIntExact(taskId));
+            Optional<Task> oldTask = Optional.ofNullable(taskRepository.findAllById(Long.valueOf(Math.toIntExact(taskId))));
 
             if (oldTask.isEmpty()) {
                 throw new Exception("Invalid taskID");
             }
 
-            if (!Objects.equals(task.getId(), oldTask.getId())) {
+            if (!Objects.equals(task.getId(), oldTask.get().id)) {
                 throw new Exception("The id does not correspond to old id");
             }
 
