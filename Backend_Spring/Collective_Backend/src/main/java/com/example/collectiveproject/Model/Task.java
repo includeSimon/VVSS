@@ -8,6 +8,7 @@ import org.hibernate.Hibernate;
 
 import javax.persistence.*;
 import java.io.Serializable;
+import java.time.LocalDate;
 import java.util.List;
 import java.util.Objects;
 
@@ -46,6 +47,8 @@ public class Task implements Serializable {
     @OneToMany(mappedBy = "task")
     @ToString.Exclude
     List<UserTask> usersTasks;
+
+    public LocalDate done;
 
 
     @Override
@@ -117,6 +120,14 @@ public class Task implements Serializable {
 
     public void setCategory(Category category) {
         this.category = category;
+    }
+
+    public LocalDate getDone() {
+        return done;
+    }
+
+    public void setDone(LocalDate done) {
+        this.done = done;
     }
 
     @Override
