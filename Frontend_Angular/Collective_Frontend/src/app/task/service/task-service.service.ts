@@ -15,6 +15,6 @@ export class TaskServiceService {
   }
 
   postTask(task: Task) {
-    return this.backendRequestsService.post( '/task/addTask', task);
+    return this.backendRequestsService.post( environment.apiUrl+'/task/addTask', task);
   }
 }
