@@ -59,7 +59,7 @@ export class CreateTaskComponent implements OnInit {
 
   onSubmit(){
     this.submitted = true;
-    // if (this.taskCreateForm.invalid) { return; }
+    if (this.taskCreateForm.invalid) { return; }
     let task = this.taskCreateForm.value;
     task.name = '';
     this.httpService.postTask(task)
@@ -72,12 +72,11 @@ export class CreateTaskComponent implements OnInit {
           if (result.message) {
             console.log("Success")
             await new Promise(f => setTimeout(f, 1500));
-            //toDo change url
             await this.router.navigate(["/add-category"]);
           }
         },
         error: () => {
-          this.router.navigate(["/"]);
+          this.router.navigate(["/add-category"]);
         }
       })
 
