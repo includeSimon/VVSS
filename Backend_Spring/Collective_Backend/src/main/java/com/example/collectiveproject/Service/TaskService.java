@@ -81,32 +81,15 @@ public class TaskService {
     }
 
     public void deleteTask(Long taskId) {
-
-//        Optional<Task> task = Optional.ofNullable(taskRepository.findAllById(Long.valueOf(Math.toIntExact(taskId))));
-//
-//
-//        if (task.isPresent()) {
-//            taskRepository.deleteById(taskId);
-//        }
         taskRepository.deleteById(taskId);
     }
 
 
-        public Task updateTask(Task task, Long taskId) throws Exception {
-            Optional<Task> oldTask = Optional.ofNullable(taskRepository.findAllById(Long.valueOf(Math.toIntExact(taskId))));
-
-            if (oldTask.isEmpty()) {
-                throw new Exception("Invalid taskID");
-            }
-
-            if (!Objects.equals(task.getId(), oldTask.get().id)) {
-                throw new Exception("The id does not correspond to old id");
-            }
-
-
-            taskRepository.save(task);
-
-            return task;
+    public void updateTask(Task task, Long taskId) {
+        Category category = this.categoryService.findCategoryByCategoryName(task.category.getNameCategory());
+        task.setCategory(category);
+        task.setId(taskId);
+        taskRepository.save(task);
         }
 
     public TaskDTO convertEntityToDto(Task task) {

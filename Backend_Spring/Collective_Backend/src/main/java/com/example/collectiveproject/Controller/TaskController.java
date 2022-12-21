@@ -56,16 +56,11 @@ public class TaskController {
      * Requires Authorization header
      * @param task the new data for the task
      * @param taskId the id of the task to be updated
-     * @return the viewModel of the updated expense
      */
     @PostMapping("/update/{taskId}")
-    public ResponseEntity<?> update(@RequestBody Task task, @PathVariable Long taskId) {
-        try {
-            task.setId(taskId);
-            return new ResponseEntity<>(taskService.updateTask(task, taskId), HttpStatus.OK);
-        } catch (ServiceException e) {
-            return new ResponseEntity<>(e.getMessage(), HttpStatus.BAD_REQUEST);
-        }
+    public void update(@RequestBody Task task, @PathVariable Long taskId) {
+        taskService.updateTask(task, taskId);
+
     }
 
 }
