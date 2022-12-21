@@ -2,6 +2,7 @@ package com.example.collectiveproject.Controller;
 
 import com.example.collectiveproject.Exceptions.IncorrectCredentialsException;
 import com.example.collectiveproject.Exceptions.UsernameNotFoundException;
+import com.example.collectiveproject.Exceptions.UsernameTakenException;
 import com.example.collectiveproject.Model.Token;
 import com.example.collectiveproject.Model.User;
 import com.example.collectiveproject.Service.AuthService;
@@ -63,11 +64,18 @@ public class AuthController {
     }
 
     @PostMapping(REGISTER_PATH)
-    public ResponseEntity<User> registerUser(@RequestBody User user) {
-        return ResponseEntity
-                .status(HttpStatus.CREATED)
-                .contentType(MediaType.APPLICATION_JSON)
-                .body(authService.registerUser(user));
+    public ResponseEntity<?> registerUser(@RequestBody User user) {
+        try {
+            return ResponseEntity
+                    .status(HttpStatus.CREATED)
+                    .contentType(MediaType.APPLICATION_JSON)
+                    .body(authService.registerUser(user));
+        } catch (UsernameTakenException e) {
+            return ResponseEntity
+                    .status(HttpStatus.UNAUTHORIZED)
+                    .contentType(MediaType.APPLICATION_JSON)
+                    .body(e);
+        }
     }
 
 }
