@@ -1,69 +1,59 @@
-<!--<mat-toolbar>-->
-<!--  <div>-->
-<!--    <button mat-icon-button *ngIf="sidenav.mode === 'over'" (click)="sidenav.toggle()"-->
-<!--            class="optionsButton">-->
-<!--      <mat-icon *ngIf="!sidenav.opened">-->
-<!--        menu-->
-<!--      </mat-icon>-->
-<!--      <mat-icon *ngIf="sidenav.opened">-->
-<!--        close-->
-<!--      </mat-icon>-->
-<!--    </button>-->
-<!--    <img src="assets/images/bug-icon.svg" width="32" alt="Bug Logo" class="bugImage">-->
-<!--    <span class="appTitle">JBugger Application</span>-->
+<mat-toolbar>
+  <div>
+    <button mat-icon-button *ngIf="sidenav.mode === 'over' " (click)="sidenav.toggle()"
+            class="optionsButton">
+      <mat-icon *ngIf="!sidenav.opened">
+        menu
+      </mat-icon>
+      <mat-icon *ngIf="sidenav.opened">
+        close
+      </mat-icon>
+    </button>
+    <img src="assets/images/houseLogo.svg" width="32" alt="House Logo" class="houseImage">
+    <span class="appTitle">Household Application</span>
+  </div>
+  <div style="margin-top: 20px">
+    <button mat-icon-button class="right-aligned"
+            aria-label="Example icon-button with logout icon">
+      <mat-icon>exit_to_app</mat-icon>
+    </button>
+  </div>
 
+</mat-toolbar>
 
-<!--  </div>-->
-<!--  <div style="margin-top: 20px">-->
-<!--    <button mat-icon-button class="right-aligned"-->
-<!--            aria-label="Example icon-button with logout icon">-->
-<!--      <mat-icon>exit_to_app</mat-icon>-->
-<!--    </button>-->
-<!--    <button mat-icon-button class="right-aligned" routerLink=""-->
-<!--            aria-label="icon-button with login icon">-->
-<!--      <mat-icon>vpn_key</mat-icon>-->
-<!--    </button>-->
-<!--  </div>-->
-<!--</mat-toolbar>-->
-
-<!--<mat-sidenav-container>-->
-<!--  <mat-sidenav #sidenav="matSidenav">-->
-<!--    <div class="side-nav-content">-->
-<!--      <h4 class="name">User</h4>-->
+<mat-sidenav-container>
+  <mat-sidenav #sidenav="matSidenav">
+    <div class="side-nav-content">
+      <h4 class="name">User</h4>
 <!--      <p class="designation">{{this.returnUsername()}}</p>-->
 
-<!--      <mat-divider></mat-divider>-->
+      <mat-divider></mat-divider>
 
-<!--      <mat-nav-list>-->
+      <mat-nav-list>
 
-<!--        <button mat-icon-button class="menu-button" (click)="openHome(); sidenav.toggle()">-->
-<!--          <mat-icon>home</mat-icon>-->
-<!--          <span>{{'SIDE_NAV.HOME' | translate}}</span>-->
-<!--        </button>-->
+        <button mat-icon-button class="menu-button" (click)="sidenav.toggle()">
+          <mat-icon>home</mat-icon>
+          <span>Home</span>
+        </button>
 
-<!--        <button mat-icon-button class="menu-button" (click)="openUsers(); sidenav.toggle()">-->
-<!--          <mat-icon>person</mat-icon>-->
-<!--          <span>{{'SIDE_NAV.USERS' | translate}}</span>-->
-<!--        </button>-->
+        <button mat-icon-button class="menu-button" (click)="sidenav.toggle()">
+          <mat-icon>person</mat-icon>
+          <span>User</span>
+        </button>
 
-<!--        <button mat-icon-button class="menu-button" (click)="openBugs(); sidenav.toggle()">-->
-<!--          <mat-icon>bug_report</mat-icon>-->
-<!--          <span>Bugs</span>-->
-<!--        </button>-->
+        <button mat-icon-button class="menu-button" (click)="sidenav.toggle()">
+          <mat-icon>assignment</mat-icon>
+          <span>Task</span>
+        </button>
+        <br>
+      </mat-nav-list>
+    </div>
+    <h3 class="app-title">Household</h3>
 
-<!--        <button mat-icon-button class="menu-button" (click)="openPermissions(); sidenav.toggle()">-->
-<!--          <mat-icon>lock</mat-icon>-->
-<!--          <span>{{'SIDE_NAV.PERMISSIONS' | translate}}</span>-->
-<!--        </button>-->
-<!--        <br>-->
-<!--      </mat-nav-list>-->
-<!--    </div>-->
-<!--    <h3 class="app-title">JBugger</h3>-->
-<!--  </mat-sidenav>-->
-<!--  <mat-sidenav-content>-->
-<!--    <div>-->
-<!--      <router-outlet></router-outlet>-->
-<!--    </div>-->
-
-<!--  </mat-sidenav-content>-->
-<!--</mat-sidenav-container>-->
+  </mat-sidenav>
+  <mat-sidenav-content>
+    <div class="content mat-elevation-z8">
+      <router-outlet></router-outlet>
+    </div>
+  </mat-sidenav-content>
+</mat-sidenav-container>
