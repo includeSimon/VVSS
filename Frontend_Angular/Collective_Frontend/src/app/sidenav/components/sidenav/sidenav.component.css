@@ -1,0 +1,186 @@
+/*mat-toolbar {*/
+/*//background: #009688;*/
+/*  background: #197477;*/
+/*  color: white;*/
+/*  justify-content: space-between;*/
+
+/*.languageSelect {*/
+/*  width: 42px;*/
+/*  color: #5b5c5e;*/
+/*  margin-right: 5px;*/
+/*}*/
+/*}*/
+
+/*mat-sidenav {*/
+/*  margin: 10px;*/
+/*  width: 15%;*/
+/*  height: 100%;*/
+/*  border-right: none;*/
+/*  background: #37878d;*/
+/*  color: #effbf7;*/
+/*  border-radius: 10px;*/
+/*  padding: 7px;*/
+/*  text-align: center;*/
+
+/*.app-title {*/
+/*  font-style: italic;*/
+/*  font-size: 0.8rem;*/
+/*  color: #effbf7;*/
+/*  margin-top: 20px;*/
+/*}*/
+
+/*.side-nav-content {*/
+/*  padding-top: 1rem;*/
+/*  background-color: #effbf7;*/
+/*  width: 100%;*/
+/*  border-radius: 7%;*/
+
+/*.name {*/
+/*  font-weight: bold;*/
+/*  font-size: 1.3rem;*/
+/*  color: #5b5c5e;*/
+/*}*/
+
+/*.designation {*/
+/*  font-style: italic;*/
+/*  font-size: 0.8rem;*/
+/*  color: #828686;*/
+/*}*/
+
+/*.designation:hover {*/
+/*  font-size: 0.8rem;*/
+/*  color: #96c75c;*/
+/*  transition: all 0.5s;*/
+/*}*/
+
+/*mat-nav-list {*/
+
+/*.menu-button {*/
+/*  border-radius: 0;*/
+/*  margin-top: 6px;*/
+/*  color: #5b5c5e;*/
+/*  background-color: #effbf7;*/
+/*  transition: all 0.5s;*/
+/*  cursor: pointer;*/
+/*  border-width: 5px;*/
+/*  border-color: #5b5c5e;*/
+/*  border-bottom: #effbf7;*/
+/*}*/
+
+/*.menu-button:hover {*/
+/*  color: #96c75c;*/
+/*}*/
+
+/*.menu-button:hover mat-icon {*/
+/*  background-color: #96c75c;*/
+/*  transition: 0.5s;*/
+/*}*/
+
+/*.menu-button:active {*/
+/*  box-shadow: 0 5px #96c75c;*/
+/*  transform: translateY(4px);*/
+/*}*/
+
+/*mat-icon {*/
+/*  background-color: #3dbfc1;*/
+/*  color: #5b5c5e;*/
+/*  border-radius: 50%;*/
+/*}*/
+
+/*.menu-button span {*/
+/*  cursor: pointer;*/
+/*  display: inline-block;*/
+/*  position: relative;*/
+/*  transition: 0.5s;*/
+/*}*/
+
+/*.menu-button span:after {*/
+/*  content: '\00bb';*/
+/*  position: absolute;*/
+/*  opacity: 0;*/
+/*  top: 0;*/
+/*  right: -20px;*/
+/*  transition: 0.5s;*/
+/*}*/
+
+/*.menu-button span {*/
+/*  padding-right: 25px;*/
+/*}*/
+
+/*.menu-button:hover span:after {*/
+/*  opacity: 1;*/
+/*  right: 0;*/
+/*}*/
+
+/*}*/
+/*}*/
+/*}*/
+
+/*.content {*/
+/*  height: calc(100vh - 98px);*/
+/*  border-radius: 10px;*/
+/*  margin: 16px;*/
+
+/*  display: flex;*/
+/*  justify-content: center;*/
+/*  align-items: center;*/
+
+/*  font-size: 2rem;*/
+/*  color: lightgray;*/
+/*}*/
+
+/*mat-sidenav-container {*/
+/*  height: calc(100vh - 65px);*/
+/*}*/
+
+/*.menu-button{*/
+/*  width: 100%;*/
+/*  display: flex;*/
+/*  align-items: center;*/
+/*  justify-content: flex-start;*/
+/*  font-size: 1rem;*/
+
+/*.mat-icon{*/
+/*  margin-right: 8px;*/
+/*  margin-left: 8px;*/
+/*}*/
+/*}*/
+
+/*.avatar {*/
+/*  margin-top: 16px;*/
+/*  width: 100px;*/
+/*  height: 100px;*/
+/*  border-radius: 50%;*/
+/*}*/
+
+/*.name {*/
+/*  margin-top: 8px;*/
+/*  font-weight: normal;*/
+/*}*/
+
+/*.designation {*/
+/*  margin-top: 2px;*/
+/*  font-size: 0.7rem;*/
+/*  color: lightgrey;*/
+/*}*/
+
+/*mat-divider {*/
+/*  margin-top: 16px;*/
+/*  margin-bottom: 16px;*/
+/*  background-color: rgba(255, 255, 255, 0.5);*/
+/*}*/
+
+/*.aligned-with-icon{*/
+/*  position: absolute;*/
+/*  margin-top: 5px;*/
+/*  margin-left: 5px; !* optional *!*/
+/*}*/
+
+/*.appTitle {*/
+/*  margin-right: 10px;*/
+/*}*/
+
+/*.bugImage {*/
+/*  margin-right: 10px;*/
+/*  margin-bottom: -10px;*/
+/*}*/
