@@ -6,8 +6,8 @@
         <mat-form-field appearance="fill">
           <mat-label>Users</mat-label>
           <mat-select [(ngModel)]="selectedUser" name="user-select" (selectionChange)="getUserTasks(selectedUser)">
-            <mat-option *ngFor="let user of users" [value]="user.username">
-              {{user.username}} <!-- Display value -->
+            <mat-option *ngFor="let user of users" [value]="user.userName">
+              {{user.userName}} <!-- Display value -->
             </mat-option>
           </mat-select>
 
@@ -22,8 +22,8 @@
         <mat-form-field appearance="fill">
           <mat-label>Available Tasks</mat-label>
           <mat-select [(ngModel)]="selectedTask" name="task-select">
-            <mat-option *ngFor="let task of tasks" [value]="task.task_name">
-              {{task.task_name}} <!-- Display value -->
+            <mat-option *ngFor="let task of tasks" [value]="task.name">
+              {{task.name}} <!-- Display value -->
             </mat-option>
           </mat-select>
 
@@ -43,25 +43,25 @@
   </mat-card-content>
 </mat-card>
 
-<table mat-table [dataSource]="userTasks" (contentChanged)="refresh()" class="mat-elevation-z8"
+<table mat-table [dataSource]="userTasks" (contentChanged)="refresh(this.selectedUser)" class="mat-elevation-z8"
        *ngIf="userTasks !== undefined || userTasks === null">
 
   <!-- Name Column -->
   <ng-container matColumnDef="task_name">
     <th mat-header-cell *matHeaderCellDef> Name </th>
-    <td mat-cell *matCellDef="let task"> {{task.task_name}} </td>
+    <td mat-cell *matCellDef="let task"> {{task.name}} </td>
   </ng-container>
 
   <!-- Category Column -->
   <ng-container matColumnDef="task_category">
     <th class="view-header-cell" mat-header-cell *matHeaderCellDef> Category </th>
-    <td mat-cell *matCellDef="let task"> {{task.task_category}} </td>
+    <td mat-cell *matCellDef="let task"> {{task.category}} </td>
   </ng-container>
 
-  <!-- Deadline Column -->
+  <!-- Status Column -->
   <ng-container matColumnDef="task_deadline">
-    <th class="view-header-cell" mat-header-cell *matHeaderCellDef> Deadline </th>
-    <td mat-cell *matCellDef="let task"> {{task.task_deadline}} </td>
+    <th class="view-header-cell" mat-header-cell *matHeaderCellDef> Status </th>
+    <td mat-cell *matCellDef="let task"> {{task.status}} </td>
   </ng-container>
 
   <tr mat-header-row class="table-header" *matHeaderRowDef="displayedColumns"></tr>

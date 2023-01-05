@@ -33,7 +33,7 @@ public class TaskController {
     }
     
     @GetMapping("/find-by-username/{username}")
-    public List<Task> findAllTasksByUsername(@PathVariable(value="username") String username){
+    public List<TaskDTO> findAllTasksByUsername(@PathVariable(value="username") String username){
         return this.taskService.findAllByUsername(username);
     }
 
@@ -43,14 +43,22 @@ public class TaskController {
         return assignationService.assignTaskToUser(taskName, username);
     }
 
-    @PostMapping("/mark-done/{taskName}")
-    public boolean markDone(@PathVariable(value="taskName") String taskName){
-        return taskService.markDone(taskName);
+    @PostMapping("/unassign-task/{taskName}/{username}")
+    public boolean unassignTask(@PathVariable(value="taskName") String taskName,
+                              @PathVariable(value="username") String username){
+        return assignationService.unAssignTaskFromUser(taskName, username);
     }
 
-    @PostMapping("/mark-undone/{taskName}")
-    public boolean markUnDone(@PathVariable(value="taskName") String taskName){
-        return taskService.markUnDone(taskName);
+    @PostMapping("/mark-done/{taskName}/{userName}")
+    public boolean markDone(@PathVariable(value="taskName") String taskName,
+                            @PathVariable(value="userName") String userName){
+        return taskService.markDone(taskName, userName);
+    }
+
+    @PostMapping("/mark-undone/{taskName}/{userName}")
+    public boolean markUnDone(@PathVariable(value="taskName") String taskName,
+                              @PathVariable(value="userName") String userName){
+        return taskService.markUnDone(taskName, userName);
     }
 
 }
