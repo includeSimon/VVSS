@@ -2,6 +2,7 @@ package com.example.collectiveproject.Controller;
 
 import com.example.collectiveproject.Model.DTO.TaskDTO;
 import com.example.collectiveproject.Model.Task;
+
 import com.example.collectiveproject.Service.TaskService;
 import org.hibernate.service.spi.ServiceException;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -39,28 +40,31 @@ public class TaskController {
     /**
      * Endpoint for deleting a task
      * Method: DELETE
-     * @param taskId the id of the expense to delete
+     * @param id the id of the expense to delete
      * @return a ResponseEntity with the TaskViewModel corresponding to the added task
      *         or with an error message if the task could not be added
      */
-    @DeleteMapping("/delete/{taskId}")
-    public void delete(@PathVariable() Long taskId) {
-      taskService.deleteTask(taskId);
-
-
+    @DeleteMapping("/delete/{id}")
+    public ResponseEntity<?> deleteTask(@PathVariable Long id) {
+        taskService.deleteTask(id);
+        return ResponseEntity.ok().build();
     }
 
     /**
      * Endpoint for updating a task
-     * Method: POST
+     * Method: PUT
      * Requires Authorization header
-     * @param task the new data for the task
-     * @param taskId the id of the task to be updated
+     * @param objectDTO the new data for the task
+     * @param id the id of the task to be updated
      */
-    @PostMapping("/update/{taskId}")
-    public void update(@RequestBody Task task, @PathVariable Long taskId) {
-        taskService.updateTask(task, taskId);
-
+    @PutMapping("/update/{id}")
+    public ResponseEntity<Task> updateTask(@RequestBody TaskDTO objectDTO, @PathVariable Long id) {
+        Task task = taskService.convertDtoToEntity(objectDTO);
+        if (!task.getId().equals(id)) {
+            return ResponseEntity.badRequest().build();
+        }
+        Task updatedTask  = taskService.updateTask(task);
+        return ResponseEntity.ok(updatedTask);
     }
 
 }

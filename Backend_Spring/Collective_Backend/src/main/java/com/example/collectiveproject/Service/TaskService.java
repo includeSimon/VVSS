@@ -10,7 +10,6 @@ import org.springframework.stereotype.Service;
 
 import java.util.List;
 import java.util.Objects;
-import java.util.Optional;
 import java.util.stream.Collectors;
 
 @Service
@@ -21,10 +20,6 @@ public class TaskService {
 
     @Autowired
     private CategoryService categoryService;
-
-    public List<Task> findAll(){
-        return this.taskRepository.findAll();
-    }
 
 
     public List<TaskDTO> getTasks(){
@@ -85,12 +80,9 @@ public class TaskService {
     }
 
 
-    public void updateTask(Task task, Long taskId) {
-        Category category = this.categoryService.findCategoryByCategoryName(task.category.getNameCategory());
-        task.setCategory(category);
-        task.setId(taskId);
-        taskRepository.save(task);
-        }
+    public Task updateTask(Task object) {
+        return taskRepository.save(object);
+    }
 
     public TaskDTO convertEntityToDto(Task task) {
         return TaskDTO.builder()
