@@ -1,0 +1,39 @@
+<div class="mat-elevation-z2">
+  <mat-table>
+    <!-- Header -->
+    <ng-container matColumnDef="separate-header-for-title">
+      <th mat-header-cell *matHeaderCellDef > <h2>CATEGORY</h2> </th>
+    </ng-container>
+    <tr mat-header-row *matHeaderRowDef="['separate-header-for-title']"></tr>
+  </mat-table>
+</div>
+
+<div class="mat-elevation-z2 table-container">
+  <table mat-table [dataSource]="dataSource" class="bug-table">
+
+    <!-- Position Column -->
+    <ng-container matColumnDef="nameCategory">
+      <th mat-header-cell *matHeaderCellDef> Name </th>
+      <td mat-cell *matCellDef="let category"> {{category.nameCategory}} </td>
+    </ng-container>
+
+    <!-- Name Column -->
+    <ng-container matColumnDef="colorCategory">
+      <th mat-header-cell *matHeaderCellDef> Color </th>
+      <td mat-cell *matCellDef="let category"> {{category.colorCategory}} </td>
+    </ng-container>
+
+
+
+    <ng-container matColumnDef="actions">
+      <th mat-header-cell *matHeaderCellDef> Update </th>
+      <td mat-cell *matCellDef="let row">
+        <button mat-icon-button (click)="this.categoryService.openDialog(row)"><mat-icon>launch</mat-icon></button>
+      </td>
+    </ng-container>
+
+    <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
+    <tr mat-row *matRowDef="let row; columns: displayedColumns;"></tr>
+  </table>
+
+</div>

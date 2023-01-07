@@ -1,0 +1,60 @@
+<!-- Pop Up Toolbar -->
+<div>
+<mat-toolbar>
+</mat-toolbar>
+</div>
+<!--  Heading for the PopUp -->
+<div>
+<mat-card>
+  <mat-card-title class="cardHeader">Update Category</mat-card-title>
+  <mat-card-content>
+    <!-- Inputs and Drop-downs in the PopUp -->
+    <form class="form-container" [formGroup]="categoryForm" (ngSubmit)="onEdit($event)">
+      <tr>
+        <td class="inputs">Name Category</td>
+        <td>
+          <mat-form-field class="fullwidth" floatPlaceholder="never">
+            <input matInput  id="nameCategory" formControlName="nameCategory" >
+            <mat-error *ngIf="categoryForm.controls['nameCategory'].hasError('required')">Name is required</mat-error>
+          </mat-form-field>
+        </td>
+      </tr>
+
+      <tr>
+        <td class="inputs">Color Category</td>
+        <td>
+          <mat-form-field class="fullwidth" floatPlaceholder="never">
+            <input matInput  id="colorCategory" formControlName="colorCategory" >
+            <ng-multiselect-dropdown formControlName="authorizations"
+                                     [placeholder]="'COLORS'"
+                                     [settings]="dropdownSettings"
+                                     [data]="dropdownList"
+                                     (onSelect)="onItemSelect($event)"
+            >
+            </ng-multiselect-dropdown>
+          </mat-form-field>
+        </td>
+      </tr>
+<!--      <tr>-->
+<!--        <td class="inputs">Color </td>-->
+<!--        <td>-->
+<!--          <mat-form-field class="full-width" floatPlaceholder="never" >-->
+<!--            <input matInput  id="colorCategory" formControlName="colorCategory" >-->
+<!--            <mat-error *ngIf="categoryForm.controls['colorCategory'].hasError('required')">Color is required</mat-error>-->
+<!--            <select matNativeControl required formControlName="colorCategory" >-->
+<!--              <option value="colorCategory"></option>-->
+<!--              <option>Options</option>-->
+<!--              <option *ngFor="let color of keys()">{{color}}</option>-->
+<!--            </select>-->
+<!--          </mat-form-field>-->
+<!--        </td>-->
+<!--      </tr>-->
+    </form>
+    <!-- Buttons for the PopUp -->
+<!--    <div class="butons" style="text-align:center; padding-top:20px;">-->
+<!--      <button mat-raised-button color="primary" (click)="onUpdate(data)" [disabled]="!userForm.valid">{{"USERFORMUPDATE.USER_UPDATE_BTN" | translate}}</button>-->
+<!--      <button mat-raised-button color="primary" (click)="onClose(); dialogRef.close()">{{"USERFORMUPDATE.USER_CLOSE_BTN" | translate}}</button>-->
+<!--    </div>-->
+  </mat-card-content>
+</mat-card>
+</div>

@@ -1,0 +1,19 @@
+.mat-toolbar{
+  background: #197477;
+  height: 45px;
+}
+
+.mat-raised-button{
+  margin-left: 1rem;
+}
+
+.inputs{
+  padding-left: 3rem;
+  padding-right: 2rem;
+}
+
+.mat-form-field{
+  width: 200px;
+  margin-top: 5px;
+
+}
