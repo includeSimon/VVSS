@@ -48,7 +48,6 @@ public class Task implements Serializable {
     @ToString.Exclude
     List<UserTask> usersTasks;
 
-    public LocalDate done;
 
 
     @Override
@@ -120,14 +119,6 @@ public class Task implements Serializable {
 
     public void setCategory(Category category) {
         this.category = category;
-    }
-
-    public LocalDate getDone() {
-        return done;
-    }
-
-    public void setDone(LocalDate done) {
-        this.done = done;
     }
 
     @Override
