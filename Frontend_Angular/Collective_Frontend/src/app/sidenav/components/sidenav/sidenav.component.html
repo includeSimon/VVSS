@@ -31,7 +31,7 @@
 
       <mat-nav-list>
 
-        <button mat-icon-button class="menu-button" (click)="sidenav.toggle()">
+        <button mat-icon-button class="menu-button" (click)="openHome(); sidenav.toggle()">
           <mat-icon>home</mat-icon>
           <span>Home</span>
         </button>
@@ -41,9 +41,17 @@
           <span>User</span>
         </button>
 
-        <button mat-icon-button class="menu-button" (click)="sidenav.toggle()">
+        <button mat-icon-button class="menu-button" (click)="openTask(); sidenav.toggle()">
           <mat-icon>assignment</mat-icon>
           <span>Task</span>
+        </button>
+        <button mat-icon-button class="menu-button" (click)="openAssignTask(); sidenav.toggle()">
+          <mat-icon>assignment_return</mat-icon>
+          <span>Assign task</span>
+        </button>
+        <button mat-icon-button class="menu-button" (click)="openCategory(); sidenav.toggle()">
+          <mat-icon>style</mat-icon>
+          <span>Category</span>
         </button>
         <br>
       </mat-nav-list>
@@ -52,7 +60,7 @@
 
   </mat-sidenav>
   <mat-sidenav-content>
-    <div class="content mat-elevation-z8">
+    <div>
       <router-outlet></router-outlet>
     </div>
   </mat-sidenav-content>

@@ -1,4 +1,5 @@
 import { Component, OnInit } from '@angular/core';
+import {Router} from "@angular/router";
 
 @Component({
   selector: 'app-sidenav',
@@ -7,9 +8,25 @@ import { Component, OnInit } from '@angular/core';
 })
 export class SidenavComponent implements OnInit {
 
-  constructor() { }
+  constructor(private router: Router) { }
 
   ngOnInit(): void {
+  }
+
+  openHome = () => {
+    this.router.navigate(['/app-home']);
+  }
+
+  openTask = () => {
+    this.router.navigate(['/app-create-task']);
+  }
+
+  openAssignTask = () => {
+    this.router.navigate(['/assign-unassign-task']);
+  }
+
+  openCategory = () => {
+    this.router.navigate(['/app-add-category']);
   }
 
 }

@@ -12,6 +12,7 @@ import {CategoryComponent} from "./category/category/category.component";
 import {TaskModule} from "./task/task.module";
 import {CategoryModule} from "./category/category.module";
 import {SidenavModule} from "./sidenav/sidenav.module";
+import {HomeModule} from "./home/home.module";
 
 @NgModule({
   declarations: [
@@ -28,7 +29,8 @@ import {SidenavModule} from "./sidenav/sidenav.module";
         UserModule,
         TaskModule,
         CategoryModule,
-        SidenavModule
+        SidenavModule,
+        HomeModule
     ],
   providers: [],
   bootstrap: [AppComponent]
