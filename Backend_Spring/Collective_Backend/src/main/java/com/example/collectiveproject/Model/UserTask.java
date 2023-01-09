@@ -30,4 +30,6 @@ public class UserTask {
     @ManyToOne
     @JoinColumn(name = "user_id")
     public User user;
+
+    private LocalDate actualDate;
 }

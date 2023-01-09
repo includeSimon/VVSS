@@ -11,6 +11,7 @@ import org.springframework.stereotype.Service;
 
 import java.time.LocalDate;
 import java.util.List;
+import java.util.Objects;
 
 
 @Service
@@ -45,6 +46,14 @@ public class AssignationService {
         User user = userService.findByUsername(username);
         if (user == null) return false;
 
+        List<Long> taskIds = userTaskRepository.findAll().stream().filter(
+                userTask -> Objects.equals(userTask.getUser().getId(), user.getId()) &&
+                        userTask.getActualDate() == null
+        ).map(userTask -> userTask.getTask().getId()).toList();
+
+        // Task already exists and it is not marked as done
+        if (taskIds.contains(task.getId())) return false;
+
         // Calculate deadline
         LocalDate deadline = LocalDate.now().plusDays(task.getDaysToCompleteTask());
 
@@ -53,6 +62,7 @@ public class AssignationService {
                                     .user(user)
                                     .task(task)
                                     .deadline(deadline)
+                                    .actualDate(null)
                                     .build();
 
         userTaskRepository.save(entry);
@@ -60,6 +70,32 @@ public class AssignationService {
         taskRepository.save(task);
         user.getUserTasks().add(entry);
         userRepository.save(user);
+        return true;
+    }
+
+    public boolean unAssignTaskFromUser(String taskName, String username) {
+        List<Task> tasks = taskService.findAll().stream()
+                .filter(task1 -> task1.getName().equals(taskName)).toList();
+        Task task;
+        try {
+            task = tasks.get(0);
+        } catch (Exception e){
+            return false;
+        }
+
+        User user = userService.findByUsername(username);
+        if (user == null) return false;
+
+        List<Long> userTaskIds = userTaskRepository.findAll().stream().filter(
+                userTask -> Objects.equals(userTask.getUser().getId(), user.getId()) &&
+                        Objects.equals(userTask.getTask().getId(), task.getId()) &&
+                        userTask.getActualDate() == null
+        ).map(UserTask::getId).toList();
+
+        for (Long id:
+                userTaskIds) {
+            userTaskRepository.deleteById(id);
+        }
         return true;
     }
 
