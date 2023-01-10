@@ -11,23 +11,27 @@ import {FormsModule} from "@angular/forms";
 import {CategoryComponent} from "./category/category/category.component";
 import {TaskModule} from "./task/task.module";
 import {CategoryModule} from "./category/category.module";
+import {SidenavModule} from "./sidenav/sidenav.module";
+import {HomeModule} from "./home/home.module";
 
 @NgModule({
   declarations: [
     AppComponent
   ],
-  imports: [
-    BrowserModule,
-    AppRoutingModule,
-    BrowserAnimationsModule,
-    CoreModule,
-    HttpClientModule,
-    FormsModule,
-    AppRoutingModule,
-    UserModule,
-    TaskModule,
-    CategoryModule
-  ],
+    imports: [
+        BrowserModule,
+        AppRoutingModule,
+        BrowserAnimationsModule,
+        CoreModule,
+        HttpClientModule,
+        FormsModule,
+        AppRoutingModule,
+        UserModule,
+        TaskModule,
+        CategoryModule,
+        SidenavModule,
+        HomeModule
+    ],
   providers: [],
   bootstrap: [AppComponent]
 })
