@@ -21,11 +21,7 @@ public class UserValidator {
     }
 
     @NotNull
-<<<<<<< HEAD
     public static boolean isValidPassword(String pass){
-=======
-    public static boolean isValidPassword(@org.jetbrains.annotations.NotNull String pass){
->>>>>>> e2c1023 (added user validator)
         boolean hasLower = false, hasUpper = false,
                 hasDigit = false;
         for (char i : pass.toCharArray())
