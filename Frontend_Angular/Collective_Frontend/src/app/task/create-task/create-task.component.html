@@ -62,11 +62,16 @@
           <div class="row">
             <div class="col-sm-6">
               <mat-form-field class="full-width">
-                <input matInput formControlName="daysToComplete" placeholder="Days to complete">
+                <mat-label>Days to complete</mat-label>
+                <mat-select formControlName="daysToComplete">
+                  <mat-option *ngFor="let day of [1, 2, 3, 4, 5, 6, 7, 8, 9, 10]" [value]="day">
+                    {{day}}
+                  </mat-option>
+                </mat-select>
               </mat-form-field>
             </div>
-          </div>
-
+          </div>        
+          
           <div class="row">
             <div class="col-sm-6">
               <mat-form-field class="full-width">
