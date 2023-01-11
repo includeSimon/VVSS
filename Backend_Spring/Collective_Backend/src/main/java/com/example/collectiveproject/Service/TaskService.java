@@ -79,7 +79,6 @@ public class TaskService {
         taskRepository.deleteById(taskId);
     }
 
-
     public Task updateTask(Task object) {
         return taskRepository.save(object);
     }
