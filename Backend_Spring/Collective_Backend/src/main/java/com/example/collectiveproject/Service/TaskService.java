@@ -3,13 +3,20 @@ package com.example.collectiveproject.Service;
 import com.example.collectiveproject.Model.Category;
 import com.example.collectiveproject.Model.DTO.TaskDTO;
 import com.example.collectiveproject.Model.Task;
+import com.example.collectiveproject.Model.User;
+import com.example.collectiveproject.Model.UserTask;
 import com.example.collectiveproject.Repository.TaskRepository;
+import com.example.collectiveproject.Repository.UserRepository;
+import com.example.collectiveproject.Repository.UserTaskRepository;
 import com.example.collectiveproject.Utility.TaskValidator;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import java.time.LocalDate;
+import java.util.ArrayList;
 import java.util.List;
 import java.util.Objects;
+import java.util.Optional;
 import java.util.stream.Collectors;
 
 @Service
@@ -17,6 +24,12 @@ public class TaskService {
 
     @Autowired
     private TaskRepository taskRepository;
+
+    @Autowired
+    private UserRepository userRepository;
+
+    @Autowired
+    private UserTaskRepository userTaskRepository;
 
     @Autowired
     private CategoryService categoryService;
@@ -30,12 +43,26 @@ public class TaskService {
     }
 
 
-    public List<Task> findAllByUsername(String username) {
-        return taskRepository.findAll().stream().filter(task ->
-                task.getUsersTasks().stream().filter(userTask ->
-                        Objects.equals(userTask.getUser().getUserName(), username)
-                ).toList().size() > 0
-        ).toList();
+    public List<TaskDTO> findAllByUsername(String username) {
+            List<User> users = userRepository.findAll().stream()
+                    .filter(user1 -> user1.getUserName().equals(username)).toList();
+            User user;
+            try {
+                user = users.get(0);
+            } catch (Exception e){
+                return null;
+            }
+
+            List<Long> taskIds = userTaskRepository.findAll().stream().filter(
+                    userTask -> Objects.equals(userTask.getUser().getId(), user.getId()) &&
+                            userTask.getActualDate() == null
+            ).map(userTask -> userTask.getTask().getId()).toList();
+
+            List<Task> tasks = new ArrayList<>();
+            for (Long taskid : taskIds) {
+                    tasks.add(taskRepository.findById(taskid).get());
+            }
+            return tasks.stream().map(this::convertEntityToDto).collect(Collectors.toList());
     }
 
     public Task addTask(Task task) throws Exception {
@@ -107,4 +134,65 @@ public class TaskService {
                 .build();
     }
 
+    public boolean markDone(String taskName, String username) {
+        List<Task> tasks = findAll().stream()
+                .filter(task1 -> task1.getName().equals(taskName)).toList();
+        Task task;
+        try {
+            task = tasks.get(0);
+        } catch (Exception e){
+            return false;
+        }
+
+        List<User> users = userRepository.findAll().stream()
+                .filter(user1 -> user1.getUserName().equals(username)).toList();
+        User user;
+        try {
+            user = users.get(0);
+        } catch (Exception e){
+            return false;
+        }
+
+        List<UserTask> userTaskList = userTaskRepository.findAll().stream().filter(
+                userTask -> Objects.equals(userTask.getUser().getId(), user.getId()) &&
+                        Objects.equals(userTask.getTask().getId(), task.getId()) &&
+                        userTask.getActualDate() == null
+        ).toList();
+        if (userTaskList.size() == 0) return false;
+        UserTask mark = userTaskList.get(0);
+        mark.setActualDate(LocalDate.now());
+        userTaskRepository.save(mark);
+        return true;
+    }
+
+    public boolean markUnDone(String taskName, String username) {
+        List<Task> tasks = findAll().stream()
+                .filter(task1 -> task1.getName().equals(taskName)).toList();
+        Task task;
+        try {
+            task = tasks.get(0);
+        } catch (Exception e){
+            return false;
+        }
+
+        List<User> users = userRepository.findAll().stream()
+                .filter(user1 -> user1.getUserName().equals(username)).toList();
+        User user;
+        try {
+            user = users.get(0);
+        } catch (Exception e){
+            return false;
+        }
+
+        List<UserTask> userTaskList = userTaskRepository.findAll().stream().filter(
+                userTask -> Objects.equals(userTask.getUser().getId(), user.getId()) &&
+                        Objects.equals(userTask.getTask().getId(), task.getId()) &&
+                        userTask.getActualDate() != null
+        ).toList();
+        if (userTaskList.size() == 0) return false;
+        UserTask mark = userTaskList.get(0);
+        mark.setActualDate(null);
+        userTaskRepository.save(mark);
+        return true;
+    }
 }

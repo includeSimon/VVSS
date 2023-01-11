@@ -1,21 +1,23 @@
 package com.example.collectiveproject.Model;
 
 import com.sun.istack.NotNull;
-import lombok.Getter;
-import lombok.Setter;
+import lombok.*;
+import org.hibernate.annotations.GenericGenerator;
 
-import javax.persistence.Entity;
-import javax.persistence.Id;
-import javax.persistence.JoinColumn;
-import javax.persistence.ManyToOne;
+import javax.persistence.*;
+import java.io.Serializable;
 import java.time.LocalDate;
 
 @Entity
 @Getter
 @Setter
+@Builder
+@NoArgsConstructor
+@AllArgsConstructor
 public class UserTask {
     @Id
-    @NotNull
+    @GeneratedValue(strategy = GenerationType.AUTO, generator = "native")
+    @GenericGenerator(name = "native", strategy = "native")
     public Long id;
 
     @NotNull
@@ -28,4 +30,6 @@ public class UserTask {
     @ManyToOne
     @JoinColumn(name = "user_id")
     public User user;
+
+    private LocalDate actualDate;
 }

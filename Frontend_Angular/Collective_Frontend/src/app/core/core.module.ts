@@ -7,6 +7,10 @@ import {MatInputModule} from "@angular/material/input";
 import {AuthService} from "./authentication/services/auth.service";
 import {NgModule} from "@angular/core";
 import {AppRoutingModule} from "../app-routing.module";
+import {ToastrModule} from "ngx-toastr";
+import {HTTP_INTERCEPTORS} from "@angular/common/http";
+import {ErrorHandlingInterceptor} from "./error-handling/error-handling.interceptor";
+import {AuthInterceptor} from "./authentication/services/auth.interceptor.service";
 
 @NgModule({
   declarations: [LoginComponent],
@@ -17,10 +21,16 @@ import {AppRoutingModule} from "../app-routing.module";
     MatButtonModule,
     MatInputModule,
     ReactiveFormsModule,
-    AppRoutingModule
+    AppRoutingModule,
+    ToastrModule.forRoot({
+      preventDuplicates: true,
+      maxOpened: 1
+    })
   ],
   providers: [
-    AuthService
+    AuthService,
+    { provide: HTTP_INTERCEPTORS, useClass: ErrorHandlingInterceptor, multi: true},
+    { provide: HTTP_INTERCEPTORS, useClass: AuthInterceptor, multi: true},
   ],
   exports: [LoginComponent]
 
