@@ -1,5 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import {Router} from "@angular/router";
+import {AuthService} from "../../../core/authentication/services/auth.service";
 
 @Component({
   selector: 'app-sidenav',
@@ -8,7 +9,7 @@ import {Router} from "@angular/router";
 })
 export class SidenavComponent implements OnInit {
 
-  constructor(private router: Router) { }
+  constructor(private router: Router, private authService: AuthService) { }
 
   ngOnInit(): void {
   }
@@ -29,4 +30,11 @@ export class SidenavComponent implements OnInit {
     this.router.navigate(['/app-add-category']);
   }
 
+  logout(): void {
+    this.authService.logout();
+  }
+
+  isLoggedIn(): boolean {
+    return this.authService.isLoggedIn();
+  }
 }

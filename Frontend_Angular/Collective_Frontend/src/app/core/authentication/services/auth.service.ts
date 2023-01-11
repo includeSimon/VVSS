@@ -21,7 +21,7 @@ export class AuthService {
           sessionStorage.setItem('loggedIn', 'true');
           this.setToken(token);
           this.decodeJWT(token);
-          this.router.navigate(['/home']).then();
+          this.router.navigate(['/app-home']).then();
         }
       );
 
