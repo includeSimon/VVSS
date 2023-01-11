@@ -16,13 +16,15 @@ import {MatCardModule} from "@angular/material/card";
 import {CreateTaskComponent} from "./create-task/create-task.component";
 import {AssignUnassignTaskComponent} from "./assign-unassign-task/assign-unassign-task.component";
 import {MatDatepickerModule} from "@angular/material/datepicker";
+import { UnmarkedTaskListComponent } from './unmarked-task-list/unmarked-task-list.component';
 
 
 
 @NgModule({
   declarations: [
     CreateTaskComponent,
-    AssignUnassignTaskComponent
+    AssignUnassignTaskComponent,
+    UnmarkedTaskListComponent
   ],
   exports: [
     AssignUnassignTaskComponent,

@@ -34,10 +34,6 @@ public class TaskService {
     @Autowired
     private CategoryService categoryService;
 
-    public List<Task> findAll(){
-        return this.taskRepository.findAll();
-    }
-
 
     public List<TaskDTO> getTasks(){
         return (taskRepository.findAll())
@@ -62,7 +58,7 @@ public class TaskService {
                             userTask.getActualDate() == null
             ).map(userTask -> userTask.getTask().getId()).toList();
 
-            List<Task> tasks = new ArrayList<>();
+            List<Task> tasks = new ArrayList<Task>();
             for (Long taskid : taskIds) {
                     tasks.add(taskRepository.findById(taskid).get());
             }
@@ -106,6 +102,14 @@ public class TaskService {
 
     }
 
+    public void deleteTask(Long taskId) {
+        taskRepository.deleteById(taskId);
+    }
+
+    public Task updateTask(Task object) {
+        return taskRepository.save(object);
+    }
+
     public TaskDTO convertEntityToDto(Task task) {
         return TaskDTO.builder()
                 .id(task.getId())
@@ -131,7 +135,7 @@ public class TaskService {
     }
 
     public boolean markDone(String taskName, String username) {
-        List<Task> tasks = findAll().stream()
+        List<Task> tasks = taskRepository.findAll().stream()
                 .filter(task1 -> task1.getName().equals(taskName)).toList();
         Task task;
         try {
@@ -162,7 +166,7 @@ public class TaskService {
     }
 
     public boolean markUnDone(String taskName, String username) {
-        List<Task> tasks = findAll().stream()
+        List<Task> tasks = taskRepository.findAll().stream()
                 .filter(task1 -> task1.getName().equals(taskName)).toList();
         Task task;
         try {
