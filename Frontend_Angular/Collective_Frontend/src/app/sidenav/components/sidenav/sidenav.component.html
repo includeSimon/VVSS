@@ -1,6 +1,6 @@
 <mat-toolbar>
   <div>
-    <button mat-icon-button *ngIf="sidenav.mode === 'over' " (click)="sidenav.toggle()"
+    <button mat-icon-button *ngIf="sidenav.mode === 'over' && isLoggedIn()" (click)="sidenav.toggle()"
             class="optionsButton">
       <mat-icon *ngIf="!sidenav.opened">
         menu
@@ -12,9 +12,9 @@
     <img src="assets/images/houseLogo.svg" width="32" alt="House Logo" class="houseImage">
     <span class="appTitle">Household Application</span>
   </div>
-  <div style="margin-top: 20px">
+  <div *ngIf="isLoggedIn()" style="margin-top: 20px">
     <button mat-icon-button class="right-aligned"
-            aria-label="Example icon-button with logout icon">
+            aria-label="Example icon-button with logout icon" (click)="logout()">
       <mat-icon>exit_to_app</mat-icon>
     </button>
   </div>

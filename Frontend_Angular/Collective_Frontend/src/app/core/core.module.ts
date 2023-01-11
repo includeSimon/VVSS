@@ -10,6 +10,7 @@ import {AppRoutingModule} from "../app-routing.module";
 import {ToastrModule} from "ngx-toastr";
 import {HTTP_INTERCEPTORS} from "@angular/common/http";
 import {ErrorHandlingInterceptor} from "./error-handling/error-handling.interceptor";
+import {AuthInterceptor} from "./authentication/services/auth.interceptor.service";
 
 @NgModule({
   declarations: [LoginComponent],
@@ -28,7 +29,8 @@ import {ErrorHandlingInterceptor} from "./error-handling/error-handling.intercep
   ],
   providers: [
     AuthService,
-    { provide: HTTP_INTERCEPTORS, useClass: ErrorHandlingInterceptor, multi: true}
+    { provide: HTTP_INTERCEPTORS, useClass: ErrorHandlingInterceptor, multi: true},
+    { provide: HTTP_INTERCEPTORS, useClass: AuthInterceptor, multi: true},
   ],
   exports: [LoginComponent]
 
