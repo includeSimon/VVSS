@@ -58,7 +58,7 @@ public class TaskService {
                             userTask.getActualDate() == null
             ).map(userTask -> userTask.getTask().getId()).toList();
 
-            List<Task> tasks = new ArrayList<>();
+            List<Task> tasks = new ArrayList<Task>();
             for (Long taskid : taskIds) {
                     tasks.add(taskRepository.findById(taskid).get());
             }
@@ -135,7 +135,7 @@ public class TaskService {
     }
 
     public boolean markDone(String taskName, String username) {
-        List<Task> tasks = findAll().stream()
+        List<Task> tasks = taskRepository.findAll().stream()
                 .filter(task1 -> task1.getName().equals(taskName)).toList();
         Task task;
         try {
@@ -166,7 +166,7 @@ public class TaskService {
     }
 
     public boolean markUnDone(String taskName, String username) {
-        List<Task> tasks = findAll().stream()
+        List<Task> tasks = taskRepository.findAll().stream()
                 .filter(task1 -> task1.getName().equals(taskName)).toList();
         Task task;
         try {

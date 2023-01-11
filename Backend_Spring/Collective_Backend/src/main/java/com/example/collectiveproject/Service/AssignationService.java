@@ -34,7 +34,7 @@ public class AssignationService {
 
 
     public boolean assignTaskToUser(String taskName, String username) {
-        List<Task> tasks = taskService.findAll().stream()
+        List<Task> tasks = taskRepository.findAll().stream()
                 .filter(task1 -> task1.getName().equals(taskName)).toList();
         Task task;
         try {
@@ -74,7 +74,7 @@ public class AssignationService {
     }
 
     public boolean unAssignTaskFromUser(String taskName, String username) {
-        List<Task> tasks = taskService.findAll().stream()
+        List<Task> tasks = taskRepository.findAll().stream()
                 .filter(task1 -> task1.getName().equals(taskName)).toList();
         Task task;
         try {
